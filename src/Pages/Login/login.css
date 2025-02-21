@@ -62,10 +62,9 @@
 }
 
 @media (max-width: 880px) {
-  .formularioLogin {
+  .formularioAdm {
     padding: 50px;
   }
-
   .form-control,
   .botaoEntrar {
     font-size: 14px;

@@ -1,0 +1,23 @@
+.footerMedico {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #2A5B3A;
+    color: white;
+    padding: 35px;
+    font-size: 20px;
+}
+
+.img-footeer {
+    width: 50px;
+}
+
+.linha-footer {
+    width: 80%;
+}
+
+.footer-social {
+    width: 80px;
+    display: flex;
+    justify-content: space-around;
+}

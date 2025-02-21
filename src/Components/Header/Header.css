@@ -1,0 +1,19 @@
+.headerMedico{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #2A5B3A;
+    color: white;
+    padding: 35px;
+    font-size: 20px;
+}
+
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.imgHeader{
+    width: 100px;
+}

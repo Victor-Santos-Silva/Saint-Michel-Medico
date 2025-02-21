@@ -1,11 +1,12 @@
 import React from 'react'
 import './login.css'
-
- 
+import Footer from '../../Components/Footer/Footer'
+import Header from '../../Components/Header/Header'
 
 export default function Login() {
     return (
         <>
+        <Header/>
             <div className="background">
                 <br />
                 <form className='formularioLogin'>
@@ -19,7 +20,7 @@ export default function Login() {
                             placeholder="Informe o número da sua CRM" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Senha:</label>
+                        <label htmlFor="password">SENHA:</label>
                         <input
                             type="password"
                             className="form-control"
@@ -29,7 +30,7 @@ export default function Login() {
                     <button type="submit" className="botaoEntrar">Entrar</button>
                 </form>
             </div>
-
+            <Footer />
         </>
     )
 }
