@@ -6,7 +6,7 @@ import Header from '../../Components/Header/Header'
 export default function Login() {
     return (
         <>
-        <Header/>
+      
             <div className="background">
                 <br />
                 <form className='formularioLogin'>
@@ -27,10 +27,11 @@ export default function Login() {
                             id="password"
                             placeholder="Informe a sua senha" />
                     </div>
-                    <button type="submit" className="botaoEntrar">Entrar</button>
+                    <button type="submit" className="botaoEntrar"
+                    Link to='/home'>Entrar</button>
                 </form>
             </div>
-            <Footer />
+            
         </>
     )
 }

@@ -1,0 +1,88 @@
+:root {
+    --primary-font: "Yeseva One", serif;
+    --color-dark-blue: #1F2B6C;
+    --color-dark-hover: #1f2b6ca8;
+    --color-blue-card-info: #2c3e50;
+    --color-card-info: #7f8c8d;
+    --color-background-card: #7dbeff25;
+    --color-light-blue: #159EEC;
+    --color-blue-contact: #0056b3;
+    --color-light-hover: #81a7ff;
+    --color-azul-calcinha: #BFD2F8;
+    --color-top-gray: #4a4a4a;
+    --color-dark-gray: #333;
+  }
+
+/* Reset básico para manter o layout limpo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Container principal para centralizar o conteúdo */
+  .error-page-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f4f6; /* Cor de fundo suave */
+    padding: 20px;
+  }
+  
+  /* Caixa de erro com sombra e bordas arredondadas */
+  .error-box {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  /* Ícone de alerta */
+  .error-icon {
+    font-size: 50px;
+    color: #ff4d4f;
+    margin-bottom: 20px;
+  }
+  
+  /* Código de erro (404) */
+  .error-code {
+    font-size: 60px;
+    color: #333333;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Mensagem principal */
+  .error-message {
+    font-size: 24px;
+    color: #555555;
+    margin-bottom: 15px;
+  }
+  
+  /* Descrição mais detalhada */
+  .error-description {
+    font-size: 16px;
+    color: #777777;
+    margin-bottom: 30px;
+  }
+  
+  /* Botão para voltar à Home */
+  .error-button {
+    background-color: var(--color-light-hover);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .error-button:hover {
+    background-color: #0056d2;
+  }
+  
