@@ -11,8 +11,8 @@ export default function Header({ isLoggedIn, username, logout }) {
 
       <nav className="navbar">
         <div className="nav-medico">
-          <Link to='/' className='links'>HOME</Link>
-          <Link to= '/agenda' className='links'>AGENDA</Link>
+          <Link to='/' className='links'>Home</Link>
+          <Link to= '/agenda' className='links'>Agenda</Link>
         </div>
 
       </nav>
