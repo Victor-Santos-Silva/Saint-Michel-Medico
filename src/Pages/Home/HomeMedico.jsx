@@ -1,11 +1,10 @@
 import React from 'react'
  import './HomeMedico.css' 
 import Header from '../../Components/Header/Header'
-import Pacientes from '../../Components/Pacientes/Pacientes'
 import Footer from '../../Components/Footer/Footer'
 
 const pacientes = [
-  { nome: "Maria Eduarda", img: "pacienteF.png" },
+  { nome: "Maria Eduarda", img: "src/Img/pacienteF.png" },
   { nome: "Marcos Santo", img: "use.png" },
   { nome: "Tuco Salamanca", img: "use.png" },
   { nome: "Gisele Amanda", img: "us.png" },

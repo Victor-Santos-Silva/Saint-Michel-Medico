@@ -1,0 +1,95 @@
+.prontuario-container {
+    text-align: center;
+    padding: 20px;
+    margin-right: 25px;
+    margin-top: 30px;
+  }
+
+  .prontuario-consultas {
+    text-align: center;
+    padding: 20px;
+    font-family: var(--second-font);
+  }
+
+  .img-servicos {
+    width: 100%;
+    height: 500px;
+    display: block;
+}
+
+.container-pacientes {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .card-paciente {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-paciente {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 10px;
+    border-bottom: 2px solid #2c5d25;
+  }
+  
+  .info-paciente {
+    display: flex;
+    align-items: center;
+  }
+  
+  .foto-paciente {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .dados-pessoais p {
+    margin: 3px 0;
+    font-size: 14px;
+  }
+  
+  .observacoes {
+    background: #2c5d25;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .detalhes-paciente {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .coluna {
+    width: 48%;
+  }
+  
+  .anexos {
+    background: #e0e0e0;
+    padding: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .rodape-paciente {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f5f5f5;
+    font-weight: bold;
+  }
+  
