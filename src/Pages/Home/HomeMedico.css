@@ -1,8 +1,70 @@
+<<<<<<< HEAD
 .corpo {
   background-color: rgb(255, 255, 255);
 }
 
 .LogoVerde {
+=======
+.consultas-container {
+  text-align: center;
+  padding: 20px;
+}
+
+body{
+  background-color: #e0ded9;
+  }
+
+.titulo-consultas {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: var(--second-font  );
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.grid-consultas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+  gap: 20px; /* Espaçamento entre os cards */
+  justify-content: center;
+  padding: 20px;
+}
+
+.card-consulta {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  height: 600px;
+  padding: 15px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card-consulta:hover {
+  transform: scale(1.05);
+}
+
+.imagem-paciente {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.nome-paciente {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.btn-perfil {
+  background-color: #555;
+  color: white;
+  padding: 10px 12px;
+  border: none;
+  margin-top: 78%;
+>>>>>>> 0084876845a70581b122f3e86c1579af9bb3f197
   width: 100%;
   height: 50vh;
 }
