@@ -1,101 +1,86 @@
-:root {
-    --primary-font: "Yeseva One", serif;
-   
-  }
-  
-  .card-pacientes {
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-  
+/* Estilização do componente Pacientes */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container-pacientes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  flex-wrap: wrap;
+  /* Permite quebra de linha quando necessário */
+  justify-content: center;
+  /* Centraliza os cards */
+  gap: 20px;
+  /* Espaço entre os cards */
+}
+
+.card-info-pacientes {
+  width: 300px;
+  /* Defina uma largura fixa para os cards */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-info-pacientes:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.paciente-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 3px solid #3b82f6;
+}
+
+.card-info-h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.card-info-h4 {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.profile-button-pacientes {
+  background: #3b82f6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  font-size: 16px;
+}
+
+.profile-button-pacientes:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
   .container-pacientes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
-  
-  .card-info-pacientes {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-grow: 1;
-    background-color:rgb(209, 209, 209);
-    width: 60%;
-    margin: auto;
-    border-radius: 10px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-    overflow: hidden;
-  }
-  
-  .card-info-pacientes:hover {
-    transform: scale(1.01);
-  }
-  
-  .Doctor-Hover:hover {
-    transform: scale(1.01);
-    background-color: var(--color-dark-hover);
-  }
-  
-  .pacientes-image {
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    object-fit: cover;
-  }
-  
-  .texto-pacientes {
-    margin-top: 20px;
-    text-align: center;
-    color: #1F2B6C;
-  }
-  
-  .card-info-h3 {
-    font-size: 1.6em;
-    color: var(--color-dark-blue);
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  
-  
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  
-  .social-icon {
-    width: 30px;
-    height: 30px;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .social-icon:hover {
-    transform: scale(1.1);
-  }
-  
-  .profile-button-pacientes {
-    background: var(--color-dark-blue);
-    color: #f2f7ff;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    font-size: 14px;
-    margin-top: 10px;
-    transition: background 0.3s ease;
-    border-radius: 5px;  /* Borda arredondada */
-  }
-  
-  .profile-button-pacientes:hover {
-    background-color: #0026ff8c;
-  }
-  
-  .card-info-pacientes:hover {
-    transform: scale(1.05);
-  }
-  
+}

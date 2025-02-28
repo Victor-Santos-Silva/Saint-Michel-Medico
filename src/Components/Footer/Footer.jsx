@@ -5,8 +5,7 @@ import './Footer.css'
 export default function Footer() {
     return (
         <>
-            <footer className='container-footer'>
-
+            <footer>
 
                 <div className='footerMedico'>
 
@@ -25,7 +24,6 @@ export default function Footer() {
                     </div>
 
                 </div>
-
             </footer>
 
         </>
