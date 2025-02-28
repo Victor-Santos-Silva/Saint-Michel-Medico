@@ -1,8 +1,11 @@
 .consultas-container {
   text-align: center;
   padding: 20px;
-  background-color: #e0ded9;
 }
+
+body{
+  background-color: #e0ded9;
+  }
 
 .titulo-consultas {
   font-size: 24px;
