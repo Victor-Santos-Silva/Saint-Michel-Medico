@@ -75,12 +75,10 @@ const Prontuario = () => {
               </div>
             </div>
           </div>
-
           <div className="observacoes">
             <div className="observacoes-topo">Observações</div>
             <div className="observacoes-conteudo"></div>
           </div>
-
           <div className="anexos">
             <p>Anexos do Paciente</p>
           </div>
@@ -93,6 +91,7 @@ const Prontuario = () => {
 
         
       </div>
+      <br />
 
       <div className="prontuario-container">
         <div className="paciente-card">
@@ -160,6 +159,7 @@ const Prontuario = () => {
 
         
       </div>
+      <br />
 
       <div className="prontuario-container">
         <div className="paciente-card">
@@ -227,7 +227,7 @@ const Prontuario = () => {
 
         
       </div>
-
+<br />
       <div className="prontuario-container">
         <div className="paciente-card">
           <div className="paciente-info">
@@ -293,6 +293,7 @@ const Prontuario = () => {
         </div>
 
       </div>
+      <br />
       <div className="prontuario-container">
         <div className="paciente-card">
           <div className="paciente-info">
@@ -359,6 +360,7 @@ const Prontuario = () => {
 
         
       </div>
+      <br /><br />
       <Footer/>
     </>
   );
