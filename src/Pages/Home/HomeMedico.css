@@ -1,31 +1,37 @@
-<<<<<<< HEAD
 .corpo {
   background-color: rgb(255, 255, 255);
 }
 
-.LogoVerde {
-=======
+
 .consultas-container {
   text-align: center;
   padding: 20px;
 }
 
-body{
+body {
   background-color: #e0ded9;
-  }
+}
+
+.LogoVerde {
+  width: 100%;
+  height: 500px; /* Altura do contêiner */
+  overflow: hidden;
+}
 
 .titulo-consultas {
   font-size: 24px;
   font-weight: bold;
-  font-family: var(--second-font  );
+  font-family: var(--second-font);
   margin-bottom: 20px;
   color: #333;
 }
 
 .grid-consultas {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas */
-  gap: 20px; /* Espaçamento entre os cards */
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 colunas */
+  gap: 20px;
+  /* Espaçamento entre os cards */
   justify-content: center;
   padding: 20px;
 }
@@ -64,7 +70,6 @@ body{
   padding: 10px 12px;
   border: none;
   margin-top: 78%;
->>>>>>> 0084876845a70581b122f3e86c1579af9bb3f197
   width: 100%;
   height: 50vh;
 }

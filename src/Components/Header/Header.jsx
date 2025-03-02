@@ -12,25 +12,25 @@ export default function Header({ isLoggedIn, username, logout }) {
       <nav className="navbar">
         <div className="nav-medico">
           <Link to='/' className='links'>Home</Link>
-          <Link to= '/agenda' className='links'>Agenda</Link>
-          <Link to= '/prontuario' className='links'>Prontuário</Link>
+          <Link to='/agenda' className='links'>Agenda</Link>
+          <Link to='/prontuario' className='links'>Prontuário</Link>
         </div>
 
       </nav>
-      
-      <div className="container-login-cadastro">
-          {isLoggedIn ? (
-            <div className="perfil-usuario">
-              <img className='userImg' src="../src/Img/userMasculino.png" />
-              <p className="nome-usuario">Olá, Dr. {username}</p>
-              <button onClick={logout} className="btn-sair-perfil">Sair</button>
-            </div>
-          ) : (
-            <div className="nav-actions">
-              <Link to='/login' className="login-button">Login</Link>
-            </div>
-          )}
-        </div>
+
+     {/*  <div className="container-login-cadastro">
+        {isLoggedIn ? (
+          <div className="perfil-usuario">
+            <img className='userImg' src="../src/Img/userMasculino.png" />
+            <p className="nome-usuario">Olá, Dr. {username}</p>
+            <button onClick={logout} className="btn-sair-perfil">Sair</button>
+          </div>
+        ) : (
+          <div className="nav-actions">
+            <Link to='/login' className="login-button">Login</Link>
+          </div>
+        )}
+      </div> */}
     </header>
   );
 }
