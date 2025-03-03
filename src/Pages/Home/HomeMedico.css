@@ -14,8 +14,6 @@ body {
 
 .LogoVerde {
   width: 100%;
-  height: 500px; /* Altura do contêiner */
-  overflow: hidden;
 }
 
 .titulo-consultas {

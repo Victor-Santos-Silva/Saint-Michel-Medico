@@ -3,8 +3,16 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./Pacientes.css";
 
-
 const pacientes = [
+  { name: "Marcinho", hora: '08:30', image: "src/Img/pacienteM.png" },
+  { name: "Flavio", hora: '09:15', image: "src/Img/pacienteM.png" },
+  { name: "Ellen", hora: '10:00', image: "src/Img/pacienteF.png" },
+  { name: "Marcinho", hora: '08:30', image: "src/Img/pacienteM.png" },
+  { name: "Flavio", hora: '09:15', image: "src/Img/pacienteM.png" },
+  { name: "Ellen", hora: '10:00', image: "src/Img/pacienteF.png" },
+  { name: "Marcinho", hora: '08:30', image: "src/Img/pacienteM.png" },
+  { name: "Flavio", hora: '09:15', image: "src/Img/pacienteM.png" },
+  { name: "Ellen", hora: '10:00', image: "src/Img/pacienteF.png" },
   { name: "Marcinho", hora: '08:30', image: "src/Img/pacienteM.png" },
   { name: "Flavio", hora: '09:15', image: "src/Img/pacienteM.png" },
   { name: "Ellen", hora: '10:00', image: "src/Img/pacienteF.png" },

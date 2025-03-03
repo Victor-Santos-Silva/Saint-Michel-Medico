@@ -3,13 +3,13 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   flex-wrap: wrap;
-  /* Permite quebra de linha quando necessário */
   justify-content: center;
-  /* Centraliza os cards */
   gap: 20px;
-  /* Espaço entre os cards */
 }
 
+.card-pacientes{
+  padding-bottom: 50px;
+}
 .card-info-pacientes {
   width: 300px;
   background: white;
