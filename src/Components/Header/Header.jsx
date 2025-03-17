@@ -13,6 +13,7 @@ export default function Header({ isLoggedIn, username, logout }) {
         <div className="nav-medico">
           <Link to='/home' className='links'>Home</Link>
           <Link to='/prontuario' className='links'>Prontuário</Link>
+          <Link to='/historico' className='links'>Histórico</Link>
         </div>
 
       </nav>
