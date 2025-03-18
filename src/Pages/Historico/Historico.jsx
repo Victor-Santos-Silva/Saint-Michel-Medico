@@ -97,6 +97,35 @@ const Historico = ({ nome, dia, hora, convenio, plano, especialidade, descricao 
             <p><strong>Descrição:</strong> {descricao}</p>
           </div>
         </div>
+        <div className="consulta-card">
+          <div className="foto">
+            <img src="src/Img/pacienteM.png" alt="Paciente" />
+          </div>
+          <div className="info">
+            <h2>{nome}</h2>
+            <p><strong>Dia da consulta:</strong> {dia}</p>
+            <p><strong>Hora da consulta:</strong> {hora}</p>
+            <p><strong>Convênio:</strong> {convenio}</p>
+            <p><strong>Plano do Convênio:</strong> {plano}</p>
+            <p><strong>Especialidade:</strong> {especialidade}</p>
+            <p><strong>Descrição:</strong> {descricao}</p>
+          </div>
+        </div>
+
+        <div className="consulta-card">
+          <div className="foto">
+            <img src="src/Img/pacienteM.png" alt="Paciente" />
+          </div>
+          <div className="info">
+            <h2>{nome}</h2>
+            <p><strong>Dia da consulta:</strong> {dia}</p>
+            <p><strong>Hora da consulta:</strong> {hora}</p>
+            <p><strong>Convênio:</strong> {convenio}</p>
+            <p><strong>Plano do Convênio:</strong> {plano}</p>
+            <p><strong>Especialidade:</strong> {especialidade}</p>
+            <p><strong>Descrição:</strong> {descricao}</p>
+          </div>
+        </div>
       </div>
       <Footer />
     </>
