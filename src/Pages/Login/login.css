@@ -1,73 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap');
+:root {
+    --primary-font: "Yeseva One", serif;
+    --second-font: "Ysabeau Infant", serif;
+    --color-dark-blue: #1F2B6C;
+    --color-dark-hover: #1f2b6ca8;
+    --color-light-blue: #159EEC;
+    --color-dark-gray: #333;
+}
+
 .background {
+  font-family: var(--second-font);
   background-image: url('../../Img/medicos.png');
   background-size: cover;
+  background-position: center;
   width: 100%;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .formularioLogin {
   width: 400px;
-  padding: 20px;
-  background-color: #000000;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: auto;
-  margin-top: 250px;
-  opacity: 80%;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px); /* Efeito de desfoque */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
 }
 
 .formularioLogin h2 {
-  text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   color: #ffffff;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   color: #ffffff;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .form-control {
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 
+.form-control:focus {
+  border-color: #266b69;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
 
+.form-control.erro {
+  border-color: #ff4d4d;
+}
 
 .botaoEntrar {
   width: 100%;
-  padding: 10px;
-
-  background-color: #266b69;
+  padding: 12px;
+  background: linear-gradient(135deg, #3c6b26, #5cbe1a);
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .botaoEntrar:hover {
-  background-color: #325f15;
+  background: linear-gradient(135deg, #325f15, #4f9e1a);
+  transform: translateY(-2px);
 }
 
-@media (max-width: 880px) {
-  .formularioAdm {
-    padding: 50px;
+.botaoEntrar:active {
+  transform: translateY(0);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .formularioLogin {
+    width: 90%;
+    padding: 20px;
   }
+
+  .formularioLogin h2 {
+    font-size: 20px;
+  }
+
   .form-control,
   .botaoEntrar {
     font-size: 14px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formularioLogin {
+    padding: 15px;
+  }
+
+  .formularioLogin h2 {
+    font-size: 18px;
+  }
+
+  .form-control,
+  .botaoEntrar {
+    font-size: 12px;
     padding: 8px;
   }
 }

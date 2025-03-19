@@ -81,6 +81,8 @@ export default function Login() {
                         onChange={handleChange}
                     />
                 </div>
+                <br />
+                <br />
                 <button type="submit" className="botaoEntrar">Entrar</button>
             </form>
         </div>
