@@ -37,7 +37,7 @@ export default function Login() {
         try {
             const response = await axios.post('http://localhost:5000/medico/login', formData);
 
-            login(response.data.usuario); // Passa o nome do usuário para o contexto
+            login(response.data.medico, response.data.token, response.data.id); // Passa o nome do usuário para o contexto
 
             setFormData({ crm: '', senha: '' }); // Limpa os campos após login
 

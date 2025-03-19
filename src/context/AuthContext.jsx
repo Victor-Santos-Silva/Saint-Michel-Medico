@@ -1,29 +1,52 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Cria o contexto
 const AuthContext = createContext();
 
-// Provedor do contexto que vai envolver a árvore de componentes
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [username, setUsername] = useState('');
+    const [nomeCompleto, setNomeCompleto] = useState('');
+    const [token, setToken] = useState(localStorage.getItem('token') || '');
+    const [id, setId] = useState(localStorage.getItem('id') || ''); // Adiciona o estado do id
 
-    const login = (name) => {
-        setUsername(name);
+    useEffect(() => {
+        const storedNomeCompleto = localStorage.getItem('nomeCompleto');
+        const storedToken = localStorage.getItem('token');
+        const storedId = localStorage.getItem('id'); // Recupera o id do localStorage
+
+        if (storedNomeCompleto && storedToken && storedId) {
+            setNomeCompleto(storedNomeCompleto);
+            setToken(storedToken);
+            setId(storedId); // Define o id
+            setIsLoggedIn(true);
+        }
+    }, []);
+
+    const login = (nome, token, id) => {
+        setNomeCompleto(nome);
+        setToken(token);
+        setId(id); // Define o id
         setIsLoggedIn(true);
+        localStorage.setItem('nomeCompleto', nome);
+        localStorage.setItem('token', token);
+        localStorage.setItem('id', id); // Armazena o id no localStorage
     };
 
     const logout = () => {
-        setUsername('');
+        setNomeCompleto('');
+        setToken('');
+        setId('');
         setIsLoggedIn(false);
+        localStorage.removeItem('nomeCompleto');
+        localStorage.removeItem('token');
+        localStorage.removeItem('id'); // Remove o id do localStorage
+        window.location.href = '/';
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, username, login, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, nomeCompleto, token, id, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-// Hook para consumir o contexto
 export const useAuth = () => useContext(AuthContext);

@@ -1,8 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Header.css';
 
-export default function Header({ isLoggedIn, username, logout }) {
+export default function Header() {
+
+  const { isLoggedIn, nomeCompleto, logout } = useAuth(); // Acessando o estado do usuário
+
+
   return (
     <header className="headerMedico">
       <div className="logoHeader">
@@ -15,7 +20,21 @@ export default function Header({ isLoggedIn, username, logout }) {
           <Link to='/prontuario' className='links'>Prontuário</Link>
           <Link to='/historico' className='links'>Histórico</Link>
         </div>
+        
+        <div className="container-login-cadastro">
+          {isLoggedIn ? (
+            <div className="perfil-usuario">
+              <p className="nome-usuario">Olá, {nomeCompleto}</p>
+              <Link onClick={logout} className="btn-sair-perfil">Sair</Link>
 
+            </div>
+          ) : (
+            <>
+
+            </>
+          )}
+
+        </div>
       </nav>
     </header>
   );
