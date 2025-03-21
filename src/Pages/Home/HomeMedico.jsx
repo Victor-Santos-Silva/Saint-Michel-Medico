@@ -31,7 +31,6 @@ export default function HomeMedico() {
       <div className='corpo'>
         <div className='imagensComeco'>
           <img className='LogoVerde' src="../src/Img/LogoVerde.png" alt="" />
-          <img className='linha' src="../src/Img/linha.png" alt="" />
           <div>
             <h2 className='titulo'>Consultas </h2>
           </div>
