@@ -39,8 +39,7 @@ export default function HomeMedico() {
             {data.length > 0 ? (
               data.map((item, index) => (
                 <div key={index} className='consultaItem'>
-                  {/* <img src={item.Usuario.imagemGenero} alt="" /> */}
-                  {/* <p>{item.Usuario.imagemGenero}</p> */}
+                  <img src={item.Usuario.imagemGenero} alt="" />
                   <p>{item.Usuario.nomeCompleto}</p>
                   <p>Data: {item.data}</p>
                   <p>Hora: {item.hora}</p>
