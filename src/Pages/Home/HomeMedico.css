@@ -96,3 +96,77 @@ label {
   font-size: 20px;
   font-style: italic;
 }
+
+/* Container da lista de consultas */
+.listaConsultas {
+  margin: 20px;
+  width: 100%;
+  gap: 20px;
+  display: flex;
+  text-align: center;
+}
+
+/* Item da consulta */
+.consultaItem {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #00796b;
+  /* Linha lateral para destaque */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.consultaItem:hover {
+  transform: translateY(-2px);
+  /* Efeito de levantar ao passar o mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.consultaItem p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.consultaItem p:first-child {
+  font-weight: bold;
+  color: #00796b;
+  /* Cor destacada para a data */
+}
+
+/* Mensagem quando não há consultas */
+.semPacientes {
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.button-prontuario {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #00796b;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-prontuario:hover {
+  background-color: #005a4f;
+}
+
+.button-prontuario:active {
+  background-color: #005a4f;
+}
