@@ -13,7 +13,9 @@ body {
 }
 
 .LogoVerde {
+  margin: auto;
   width: 100%;
+  display: flex;
 }
 
 .titulo-consultas {
