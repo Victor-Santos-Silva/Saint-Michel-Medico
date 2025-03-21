@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Header.css';
 
@@ -17,24 +17,18 @@ export default function Header() {
       <nav className="navbar">
         <div className="nav-medico">
           <Link to='/home' className='links'>Home</Link>
-          <Link to='/prontuario' className='links'>Prontuário</Link>
           <Link to='/historico' className='links'>Histórico</Link>
         </div>
-        
+
         <div className="container-login-cadastro">
           {isLoggedIn ? (
             <div className="perfil-usuario">
               <p className="nome-usuario">Olá, {nomeCompleto}</p>
               <Link onClick={logout} className="btn-sair-perfil">Sair</Link>
-
             </div>
-          ) : (
-            <>
-
-            </>
-          )}
-
+          ) : null}
         </div>
+        
       </nav>
     </header>
   );

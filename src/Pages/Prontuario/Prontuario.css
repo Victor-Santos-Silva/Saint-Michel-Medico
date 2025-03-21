@@ -1,143 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap');
-
-:root {
-    --primary-font: "Yeseva One", serif;
-    --second-font: "Ysabeau Infant", serif;
-}
-
-.img-servicos {
-  width: 100%;
-  height: 500px;
-  display: block;
-}
-
-body {
-  background-color: #e0ded9;
-}
-
-.prontuario-consultas {
-  text-align: center;
-  font-size: 30px;
-  padding: 20px;
-  font-family: var(--second-font);
-}
-
-.prontuario-container {
-  max-width: 1800px;
-  padding-bottom: 0;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.paciente-card {
-  padding: 15px;
-  margin-bottom: 0;
+/* Container principal */
+.container-prontuario {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 30px;
   background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  color: #333;
 }
 
-.paciente-info {
-  display: flex;
-  justify-content: space-between;
+/* Título */
+.container-prontuario h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-.paciente-dados {
-  display: flex;
-  gap: 15px;
+/* Imagem do paciente */
+.container-prontuario img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #3498db;
+  display: block;
+  margin: 0 auto 20px;
 }
 
-.paciente-foto {
-  width: 73px;
-  height: 70px;
+/* Campos do prontuário */
+.container-prontuario p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  margin: 10px 0;
+}
+
+/* Adicionando um label para os campos */
+.container-prontuario .field-label {
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+/* Estilizando os detalhes dos campos */
+.container-prontuario p span {
+  color: #7f8c8d;
+}
+
+/* Separador entre os campos */
+.container-prontuario p:not(:last-child) {
+  border-bottom: 1px solid #ecf0f1;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  .container-prontuario {
+    padding: 20px;
+    max-width: 100%;
   }
 
-.paciente-textos p {
-  margin: 2px 0;
-}
+  .container-prontuario h2 {
+    font-size: 24px;
+  }
 
-.observacoes {
-  width: 100%;
-  padding: 10px;
-  background-color: white;
-  font-family: var(--second-font);
-}
+  .container-prontuario img {
+    width: 120px;
+    height: 120px;
+  }
 
-.observacoes-topo {
-  background-color: #004d00;
-  color: white;
-  padding: 10px;
-  font-weight: bold;
-  text-align: center;
+  .container-prontuario p {
+    font-size: 14px;
+  }
 }
-
-.observacoes-conteudo {
-  height: 100px;
-  background-color: #ddd;
-  padding: 90px;
-}
-
-.paciente-detalhes {
-  margin-top: 15px;
-}
-
-.linha {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.campo {
-  flex: 1;
-}
-
-.campo.grande {
-  flex: 2;
-}
-
-.campo label {
-  display: block;
-  font-family: var(--second-font);
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.campo input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.anexos {
-  margin-top: 10px;
-  background-color: #eee;
-  font-family: var(--second-font);
-  padding: 10px;
-}
-
-.paciente-rodape {
-  display: flex;
-  margin-top: 0;
-  justify-content: space-between;
-  padding: 10px;
-  background-color: #ccc;
-  font-weight: bold;
-}
-
-strong{
-  font-family: var(--second-font);
-}
-
-.Anexo{
-  margin-right: 23%;
-}
-
-.Data{
-  margin-left: 25%;
-}
-

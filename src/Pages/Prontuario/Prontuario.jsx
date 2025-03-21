@@ -1,367 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import './Prontuario.css';
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
-import './Prontuario.css';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const Prontuario = () => {
-  const [paciente, setPaciente] = useState({
-    nome: "Maria Santos",
-    idade: "30 anos",
-    prontuario: "9965484",
-    genero: "",
-    img: "src/Img/pacienteF.png",
-    nascimento: "",
-    telefone: "",
-    cpf: "",
-    email: "",
-    endereco: ""
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setPaciente({ ...paciente, [name]: value });
-  };
+  const { id } = useParams();
+  const [usuario, setUsuario] = useState(null);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/paciente/${id}`)
+      .then(response => {
+        setUsuario(response.data.usuario);
+        console.log(response.data.usuario);
+
+      })
+
+      .catch(error => console.error("Erro ao buscar prontuário:", error));
+  }, [id]);
+
+  if (!usuario) return <p>Carregando...</p>;
 
   return (
     <>
       <Header />
-      <img src="src/Img/LogoVerde.png" className="img-servicos" alt="Logo" />
-      <h2 className="prontuario-consultas">PRONTUÁRIO</h2>
-      <div className="prontuario-container">
-        <div className="paciente-card">
-          <div className="paciente-info">
-            <div className="paciente-dados">
-              <img src={paciente.img} alt={paciente.nome} className="paciente-foto" />
-              <div className="paciente-textos">
-                <p><strong>{paciente.nome}</strong></p>
-                <p>{paciente.idade}</p>
-                <p><strong>Prontuário:</strong> {paciente.prontuario}</p>
-                <p className={`genero-${paciente.genero.toLowerCase()}`}>{paciente.genero}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="paciente-detalhes">
-            <div className="linha">
-              <div className="campo">
-                <label>CPF</label>
-                <input type="text" name="cpf" value={paciente.cpf} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Telefone</label>
-                <input type="tel" name="telefone" value={paciente.telefone} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo">
-                <label>Nascimento</label>
-                <input type="date" name="nascimento" value={paciente.nascimento} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Gênero</label>
-                <input type="text" name="genero" value={paciente.genero} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo grande">
-                <label>Email</label>
-                <input type="email" name="email" value={paciente.email} onChange={handleChange} />
-              </div>
-              <div className="campo grande">
-                <label>Endereço</label>
-                <input type="text" name="endereco" value={paciente.endereco} onChange={handleChange} />
-              </div>
-            </div>
-          </div>
-          <div className="observacoes">
-            <div className="observacoes-topo">Observações</div>
-            <div className="observacoes-conteudo"></div>
-          </div>
-          <div className="anexos">
-            <p>Anexos do Paciente</p>
-          </div>
-
-          <div className="paciente-rodape">
-            <p className='Data'><strong>Data</strong></p>
-            <p className='Anexo'><strong>Anexo do paciente</strong></p>
-          </div>
-        </div>
-
-        
+      <div className='container-prontuario'>
+        <h2>Prontuário de {usuario.nomeCompleto}</h2>
+        <img src={usuario.imagemGenero} alt="Imagem do Paciente" />
+        <p><span className="field-label">Convênio Médico:</span><span> {usuario.convenioMedico}</span></p>
+        <p><span className="field-label">CPF:</span><span> {usuario.cpf}</span></p>
+        <p><span className="field-label">Data de Nascimento:</span><span> {usuario.dataDeNascimento}</span></p>
+        <p><span className="field-label">Email:</span><span> {usuario.email}</span></p>
+        <p><span className="field-label">Endereço:</span><span> {usuario.endereco}</span></p>
+        <p><span className="field-label">Gênero:</span><span> {usuario.genero}</span></p>
+        <p><span className="field-label">Plano de Convênio:</span><span> {usuario.planoConvenio}</span></p>
+        <p><span className="field-label">RG:</span><span> {usuario.rg}</span></p>
+        <p><span className="field-label">Telefone:</span><span> {usuario.telefone}</span></p>
+        <p><span className="field-label">Tipo Sanguíneo:</span><span> {usuario.tipoSanguineo}</span></p>
       </div>
-      <br />
-
-      <div className="prontuario-container">
-        <div className="paciente-card">
-          <div className="paciente-info">
-            <div className="paciente-dados">
-              <img src={paciente.img} alt={paciente.nome} className="paciente-foto" />
-              <div className="paciente-textos">
-                <p><strong>{paciente.nome}</strong></p>
-                <p>{paciente.idade}</p>
-                <p><strong>Prontuário:</strong> {paciente.prontuario}</p>
-                <p className={`genero-${paciente.genero.toLowerCase()}`}>{paciente.genero}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="paciente-detalhes">
-            <div className="linha">
-              <div className="campo">
-                <label>CPF</label>
-                <input type="text" name="cpf" value={paciente.cpf} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Telefone</label>
-                <input type="tel" name="telefone" value={paciente.telefone} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo">
-                <label>Nascimento</label>
-                <input type="date" name="nascimento" value={paciente.nascimento} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Gênero</label>
-                <input type="text" name="genero" value={paciente.genero} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo grande">
-                <label>Email</label>
-                <input type="email" name="email" value={paciente.email} onChange={handleChange} />
-              </div>
-              <div className="campo grande">
-                <label>Endereço</label>
-                <input type="text" name="endereco" value={paciente.endereco} onChange={handleChange} />
-              </div>
-            </div>
-          </div>
-
-          <div className="observacoes">
-            <div className="observacoes-topo">Observações</div>
-            <div className="observacoes-conteudo"></div>
-          </div>
-
-          <div className="anexos">
-            <p>Anexos do Paciente</p>
-          </div>
-
-          <div className="paciente-rodape">
-            <p className='Data'><strong>Data</strong></p>
-            <p className='Anexo'><strong>Anexo do paciente</strong></p>
-          </div>
-        </div>
-
-        
-      </div>
-      <br />
-
-      <div className="prontuario-container">
-        <div className="paciente-card">
-          <div className="paciente-info">
-            <div className="paciente-dados">
-              <img src={paciente.img} alt={paciente.nome} className="paciente-foto" />
-              <div className="paciente-textos">
-                <p><strong>{paciente.nome}</strong></p>
-                <p>{paciente.idade}</p>
-                <p><strong>Prontuário:</strong> {paciente.prontuario}</p>
-                <p className={`genero-${paciente.genero.toLowerCase()}`}>{paciente.genero}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="paciente-detalhes">
-            <div className="linha">
-              <div className="campo">
-                <label>CPF</label>
-                <input type="text" name="cpf" value={paciente.cpf} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Telefone</label>
-                <input type="tel" name="telefone" value={paciente.telefone} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo">
-                <label>Nascimento</label>
-                <input type="date" name="nascimento" value={paciente.nascimento} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Gênero</label>
-                <input type="text" name="genero" value={paciente.genero} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo grande">
-                <label>Email</label>
-                <input type="email" name="email" value={paciente.email} onChange={handleChange} />
-              </div>
-              <div className="campo grande">
-                <label>Endereço</label>
-                <input type="text" name="endereco" value={paciente.endereco} onChange={handleChange} />
-              </div>
-            </div>
-          </div>
-
-          <div className="observacoes">
-            <div className="observacoes-topo">Observações</div>
-            <div className="observacoes-conteudo"></div>
-          </div>
-
-          <div className="anexos">
-            <p>Anexos do Paciente</p>
-          </div>
-
-          <div className="paciente-rodape">
-            <p className='Data'><strong>Data</strong></p>
-            <p className='Anexo'><strong>Anexo do paciente</strong></p>
-          </div>
-        </div>
-
-        
-      </div>
-<br />
-      <div className="prontuario-container">
-        <div className="paciente-card">
-          <div className="paciente-info">
-            <div className="paciente-dados">
-              <img src={paciente.img} alt={paciente.nome} className="paciente-foto" />
-              <div className="paciente-textos">
-                <p><strong>{paciente.nome}</strong></p>
-                <p>{paciente.idade}</p>
-                <p><strong>Prontuário:</strong> {paciente.prontuario}</p>
-                <p className={`genero-${paciente.genero.toLowerCase()}`}>{paciente.genero}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="paciente-detalhes">
-            <div className="linha">
-              <div className="campo">
-                <label>CPF</label>
-                <input type="text" name="cpf" value={paciente.cpf} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Telefone</label>
-                <input type="tel" name="telefone" value={paciente.telefone} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo">
-                <label>Nascimento</label>
-                <input type="date" name="nascimento" value={paciente.nascimento} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Gênero</label>
-                <input type="text" name="genero" value={paciente.genero} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo grande">
-                <label>Email</label>
-                <input type="email" name="email" value={paciente.email} onChange={handleChange} />
-              </div>
-              <div className="campo grande">
-                <label>Endereço</label>
-                <input type="text" name="endereco" value={paciente.endereco} onChange={handleChange} />
-              </div>
-            </div>
-          </div>
-
-          <div className="observacoes">
-            <div className="observacoes-topo">Observações</div>
-            <div className="observacoes-conteudo"></div>
-          </div>
-
-          <div className="anexos">
-            <p>Anexos do Paciente</p>
-          </div>
-
-          <div className="paciente-rodape">
-            <p className='Data'><strong>Data</strong></p>
-            <p className='Anexo'><strong>Anexo do paciente</strong></p>
-          </div>
-        </div>
-
-      </div>
-      <br />
-      <div className="prontuario-container">
-        <div className="paciente-card">
-          <div className="paciente-info">
-            <div className="paciente-dados">
-              <img src={paciente.img} alt={paciente.nome} className="paciente-foto" />
-              <div className="paciente-textos">
-                <p><strong>{paciente.nome}</strong></p>
-                <p>{paciente.idade}</p>
-                <p><strong>Prontuário:</strong> {paciente.prontuario}</p>
-                <p className={`genero-${paciente.genero.toLowerCase()}`}>{paciente.genero}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="paciente-detalhes">
-            <div className="linha">
-              <div className="campo">
-                <label>CPF</label>
-                <input type="text" name="cpf" value={paciente.cpf} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Telefone</label>
-                <input type="tel" name="telefone" value={paciente.telefone} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo">
-                <label>Nascimento</label>
-                <input type="date" name="nascimento" value={paciente.nascimento} onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Gênero</label>
-                <input type="text" name="genero" value={paciente.genero} onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="linha">
-              <div className="campo grande">
-                <label>Email</label>
-                <input type="email" name="email" value={paciente.email} onChange={handleChange} />
-              </div>
-              <div className="campo grande">
-                <label>Endereço</label>
-                <input type="text" name="endereco" value={paciente.endereco} onChange={handleChange} />
-              </div>
-            </div>
-          </div>
-
-          <div className="observacoes">
-            <div className="observacoes-topo">Observações</div>
-            <div className="observacoes-conteudo"></div>
-          </div>
-
-          <div className="anexos">
-            <p>Anexos do Paciente</p>
-          </div>
-
-          <div className="paciente-rodape">
-            <p className='Data'><strong>Data</strong></p>
-            <p className='Anexo'><strong>Anexo do paciente</strong></p>
-          </div>
-        </div>
-
-        
-      </div>
-      <br /><br />
-      <Footer/>
+      <Footer />
     </>
   );
 };

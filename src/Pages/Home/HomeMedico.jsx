@@ -42,7 +42,7 @@ export default function HomeMedico() {
                   <p>{item.Usuario.nomeCompleto}</p>
                   <p>Data: {item.data}</p>
                   <p>Hora: {item.hora}</p>
-                  <Link className='button-prontuario' to='/prontuario'> Prontuario</Link>
+                  <Link className='button-prontuario' to={`/prontuario/${item.Usuario.id}`}>Prontuario</Link>
                 </div>
               ))
             ) : (
