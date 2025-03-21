@@ -100,7 +100,6 @@ label {
 /* Container da lista de consultas */
 .listaConsultas {
   margin: 20px;
-  width: 100%;
   gap: 20px;
   display: flex;
   text-align: center;
