@@ -92,6 +92,7 @@ body {
 
 
 .titulo {
+  color: #252525;
   text-align: center;
   margin-top: 20px;
   font-size: 40px;
@@ -126,8 +127,7 @@ label {
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #00796b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.692);
   /* Linha lateral para destaque */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -140,6 +140,8 @@ label {
 
 .consultaItem p {
   margin: 5px 0;
+  font-family: var(--second-font);
+  font-weight: bold;
   font-size: 16px;
   color: #333;
 }
@@ -168,7 +170,7 @@ label {
   font-size: 16px;
   font-weight: bold;
   color: #fff;
-  background-color: #00796b;
+  background-color: #2A5B3A;
   border: none;
   border-radius: 5px;
   text-align: center;
@@ -178,7 +180,7 @@ label {
 }
 
 .button-prontuario:hover {
-  background-color: #005a4f;
+  background-color: #003813;
 }
 
 .button-prontuario:active {

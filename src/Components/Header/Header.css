@@ -37,7 +37,6 @@
 
 .nav-medico {
     display: flex;
-
     gap: 20px;
 }
 
@@ -84,6 +83,7 @@
     text-decoration: none;
     font-family: var(--second-font);
     font-weight: bold;
+    display: flex;
     cursor: pointer;
     color: white;
 }
