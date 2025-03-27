@@ -28,6 +28,7 @@ export default function HomeMedico() {
   return (
     <>
       <Header />
+      <br /><br /><br /><br />
       <div className='corpo'>
         <div className='imagensComeco'>
           <img className='LogoVerde' src="../src/Img/LogoVerde.png" alt="" />

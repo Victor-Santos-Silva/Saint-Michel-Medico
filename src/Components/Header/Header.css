@@ -10,86 +10,142 @@
     --color-dark-gray: #333;
 }
 
+/* Header.css */
 .headerMedico {
     display: flex;
     align-items: center;
-    background-color: #2A5B3A;
+    justify-content: space-between;
+    background: linear-gradient(145deg, #0c8333, #1b522d);
     color: white;
-    padding: 20px;
-    font-size: 20px;
+    padding: 0 5%;
     height: 80px;
     width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #159EEC;
+}
+
+.logoHeader {
+    transition: transform 0.3s ease;
+}
+
+.logoHeader:hover {
+    transform: scale(1.05);
 }
 
 .imgHeader {
-    width: 250px;
+    width: 180px;
+    height: auto;
+    transition: filter 0.3s ease;
 }
 
 .navbar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: 29.5%;
-    justify-content: space-between;
-    width: 100%;
-
+    gap: 40px;
 }
 
 .nav-medico {
     display: flex;
-    gap: 20px;
-}
-
-.nav-actions {
-    display: flex;
-    justify-content: flex-end;
-    flex-grow: 1;
-}
-
-.login-button {
-    display: inline-block;
-    background-color: #ffffff;
-    color: black;
-    text-decoration: none;
-    border: none;
-    width: 150px;
-    height: 30px;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 15px;
-    text-align: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.login-button:hover {
-    background-color: #73ca77;
-}
-
-.btn-sair-perfil {
-    padding: 10px 30px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: none;
-    text-align: center;
-    transition: background-color 0.3s, transform 0.2s;
-    color: var(--color-cadastro-hover);
-    display: inline-block;
+    gap: 30px;
+    margin-left: 40px;
 }
 
 .links {
-    text-decoration: none;
-    font-family: var(--second-font);
-    font-weight: bold;
-    display: flex;
-    cursor: pointer;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
     color: white;
+    text-decoration: none;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
 }
 
-.perfil-usuario{
+.links::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #15ec15;
+    transition: width 0.3s ease;
+}
+
+.links:hover::after {
+    width: 100%;
+}
+
+.links:hover {
+    color: #8BC34A;
+}
+
+.perfil-usuario {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    position: relative;
+}
+
+.nome-usuario {
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-sair-perfil {
+    padding: 10px 25px;
+    border: 2px solid #2eec15;
+    border-radius: 25px;
+    background: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.btn-sair-perfil:hover {
+    background: #00000071;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(21, 158, 236, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar {
+        gap: 20px;
+    }
+    
+    .nav-medico {
+        gap: 15px;
+        margin-left: 20px;
+    }
+    
+    .imgHeader {
+        width: 140px;
+    }
+    
+    .links {
+        font-size: 1rem;
+    }
+    
+    .btn-sair-perfil {
+        padding: 8px 20px;
+        font-size: 0.8rem;
+    }
+    
+    .nome-usuario {
+        display: none;
+    }
 }

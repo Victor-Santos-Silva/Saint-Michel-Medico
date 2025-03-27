@@ -1,31 +1,51 @@
+// Footer.js
 import React from 'react'
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import './Footer.css'
 
 export default function Footer() {
     return (
-        <>
-            <footer>
+        <footer className='footerMedico'>
+            <img 
+                src="src/Img/FooterLogo.png" 
+                alt="Logo do Hospital Saint-Michel" 
+                className='img-footeer' 
+            />
 
-                <div className='footerMedico'>
+            <p>© 2025 Direitos reservados Hospital Saint-Michel by PNTEC-LTD</p>
 
-                    <img src="src/Img/FooterLogo.png" alt="Logo do Hospital Saint-Michel" className='img-footeer' />
+            <div>
+                <span>Parcerias estratégicas:</span> 
+                <strong>Libbs Pharmaceuticals</strong>
+                <span style={{ fontSize: '0.8rem', opacity: 0.8 }}>Saúde e Inovação</span>
+            </div>
 
-                    <p>© 2025 Direitos reservados Hospital Saint-Michel by PNTEC-LTD</p>
-
-                    <div>
-                        <span>Parcerias:</span> <strong>Libbs</strong>
-                    </div>
-
-                    <div className="footer-social">
-                        <FaLinkedin />
-                        <FaFacebook />
-                        <FaInstagram />
-                    </div>
-
-                </div>
-            </footer>
-
-        </>
+            <div className="footer-social">
+                <a 
+                    href="https://linkedin.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                >
+                    <FaLinkedin />
+                </a>
+                <a 
+                    href="https://facebook.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                >
+                    <FaFacebook />
+                </a>
+                <a 
+                    href="https://instagram.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                >
+                    <FaInstagram />
+                </a>
+            </div>
+        </footer>
     )
 }
