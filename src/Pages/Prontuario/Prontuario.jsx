@@ -22,6 +22,7 @@ const Prontuario = () => {
   return (
     <>
       <Header />
+      <br /><br /><br />
       <div className='container-prontuario'>
         <h2>Prontuário</h2>
         
