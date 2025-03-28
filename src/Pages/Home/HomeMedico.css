@@ -186,3 +186,7 @@ label {
 .button-prontuario:active {
   background-color: #005a4f;
 }
+
+.container-prontuario{
+  margin-top: 1000px;
+}

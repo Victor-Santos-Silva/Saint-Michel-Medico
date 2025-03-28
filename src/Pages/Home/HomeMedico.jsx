@@ -2,28 +2,28 @@ import React, { useEffect, useState } from 'react';
 import './HomeMedico.css';
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
-import { useAuth } from '../../context/AuthContext'; // Importe o useAuth
+import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export default function HomeMedico() {
   const [data, setData] = useState([]);
-  const { id } = useAuth(); // Use o hook useAuth para acessar o ID do médico logado
-  const medicoLogadoId = id; // Armazena o ID do médico logado
+  const { id } = useAuth();
+  const medicoLogadoId = id;
 
   useEffect(() => {
     axios.get(`http://localhost:5000/agendamento/listar?medico_id=${medicoLogadoId}`)
       .then(response => {
-        // Filtra os agendamentos pelo ID do médico logado
-        const agendamentosDoMedico = response.data.filter(
-          agendamento => agendamento.medico_id === parseInt(medicoLogadoId) // Converte para número, se necessário
-        );
-        setData(agendamentosDoMedico);
+        // Verifica se a resposta tem dados e é um array
+        if (response.data && Array.isArray(response.data)) {
+          setData(response.data);
+          console.log(response.data);
+        }
       })
       .catch(error => {
-        console.error("Erro ao buscar dados:", error); // Exibe o erro no console
+        console.error("Erro ao buscar dados:", error);
       });
-  }, [medicoLogadoId]); // Adiciona medicoLogadoId como dependência
+  }, [medicoLogadoId]);
 
   return (
     <>
@@ -39,11 +39,23 @@ export default function HomeMedico() {
             {data.length > 0 ? (
               data.map((item, index) => (
                 <div key={index} className='consultaItem'>
-                  <img src={item.Usuario.imagemGenero} alt="" />
-                  <p>{item.Usuario.nomeCompleto}</p>
+                  {/* Verificação segura para a imagem */}
+                  {item.usuario?.imagemGenero && (
+                    <img src={item.usuario.imagemGenero} alt="Paciente" />
+                  )}
+
+                  {/* Verificação segura para o nome */}
+                  <p>{item.usuario?.nomeCompleto || 'Nome não disponível'}</p>
+
                   <p>Data: {item.data}</p>
                   <p>Hora: {item.hora}</p>
-                  <Link className='button-prontuario' to={`/prontuario/${item.Usuario.id}`}>Prontuario</Link>
+
+                  {/* Verificação segura para o link do prontuário */}
+                  {item.usuario?.id && (
+                    <Link className='button-prontuario' to={`/prontuario/${item.usuario.id}`}>
+                      Prontuário
+                    </Link>
+                  )}
                 </div>
               ))
             ) : (

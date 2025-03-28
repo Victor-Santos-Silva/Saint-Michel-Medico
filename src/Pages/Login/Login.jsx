@@ -9,12 +9,12 @@ export default function Login() {
 
     const [formData, setFormData] = useState({
         crm: '',
-        senha: ''
+        senha_corporativa: ''
     });
 
     const [error, setError] = useState({
         crm: false,
-        senha: false
+        senha_corporativa: false
     });
 
     const { login } = useAuth(); // Acesso à função login do contexto
@@ -28,9 +28,9 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!formData.crm || !formData.senha) {
+        if (!formData.crm || !formData.senha_corporativa) {
             alert("Preencha todos os campos!");
-            setError({ crm: !formData.crm, senha: !formData.senha });
+            setError({ crm: !formData.crm, senha_corporativa: !formData.senha_corporativa });
             return;
         }
 
@@ -38,8 +38,8 @@ export default function Login() {
             const response = await axios.post('http://localhost:5000/medico/login', formData);
 
             login(response.data.medico, response.data.token, response.data.id); // Passa o nome do usuário para o contexto
-
-            setFormData({ crm: '', senha: '' }); // Limpa os campos após login
+            
+            setFormData({ crm: '', senha_corporativa: '' }); // Limpa os campos após login
 
             navigate('/home'); // Indo para a página home
         } catch (error) {
@@ -47,7 +47,7 @@ export default function Login() {
 
             setError({
                 crm: true,
-                senha: true
+                senha_corporativa: true
             });
         }
     };
@@ -73,11 +73,11 @@ export default function Login() {
                     <label htmlFor="senha">SENHA:</label>
                     <input
                         type="password"
-                        name="senha"
-                        className={`form-control ${error.senha ? 'erro' : ''}`}
+                        name="senha_corporativa"
+                        className={`form-control ${error.senha_corporativa ? 'erro' : ''}`}
                         id="senha"
                         placeholder="Informe a sua senha"
-                        value={formData.senha}
+                        value={formData.senha_corporativa}
                         onChange={handleChange}
                     />
                 </div>
