@@ -1,75 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap');
-:root {
-    --primary-font: "Yeseva One", serif;
-    --second-font: "Ysabeau Infant", serif;
-    --color-dark-blue: #1F2B6C;
-    --color-dark-hover: #1f2b6ca8;
-    --color-light-blue: #159EEC;
-    --color-dark-gray: #333;
+.corpo-historico {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-body {
-        background-color: white;
-    }
+.titulo-principal {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
 
-    .tittle-contato {
-        font-family: var(--second-font);
-        font-weight: bold;
-        font-size: 28px;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 22px;
-    }
-    
+.secao-historico {
+  margin-bottom: 40px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-    .historico-container {
-        display: flex;
-        flex-wrap: wrap; /* Permite que os cartões quebrem para a próxima linha */
-        gap: 8px; /* Espaçamento entre os cartões */
-        padding: 16px;
-    }
+.titulo-secao {
+  color: #3498db;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
 
-    .consulta-card {
-        display: flex;
-        align-items: flex-start;
-        border: 1px solid #ccc;
-        padding: 18px;
-        width:calc(33.33% - 6px); /* Diminuí a largura dos cartões */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #D9D9D9;
-    }
+.lista-historico {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-    .foto {
-        width: 160px; /* Largura da imagem reduzida */
-        height: 170px; /* Altura da imagem ajustada */
-        margin-right: 16px;
-        overflow: hidden;
-    }
+.item-historico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
 
-    .foto img {
-        width: 100%;
-        height: 100%;
-    }
+.item-historico:hover {
+  transform: translateY(-3px);
+}
 
-    .info {
-        flex: 1;
-    }
+.info-paciente {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-    .info h2 {
-        margin: 0 0 8px 0;
-        font-size: 1.5em;
-        color: #333;
-    }
+.foto-paciente {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3498db;
+}
 
-    .info p {
-        margin: 4px 0;
-        font-size: 1em;
-        color: #555;
-    }
+.dados-paciente h3 {
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+}
 
-    .info strong {
-        color: #000;
-    }
+.dados-paciente p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.botao-prontuario {
+  padding: 8px 15px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.botao-prontuario:hover {
+  background-color: #2980b9;
+}
+
+.sem-registros {
+  text-align: center;
+  color: #7f8c8d;
+  font-style: italic;
+  padding: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .item-historico {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .acoes-historico {
+    align-self: flex-end;
+  }
+}

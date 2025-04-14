@@ -73,7 +73,7 @@ export default function HomeMedico() {
 
 
       <div className='imagensComeco'>
-        <h2 className='titulo'>Consultas Docentes</h2>
+        <h2 className='titulo'>Consultas de Parentesco</h2>
         <div className='listaConsultas'>
           {dataDocentes.length > 0 ? (
             dataDocentes.map((item, index) => (
@@ -90,7 +90,7 @@ export default function HomeMedico() {
               </div>
             ))
           ) : (
-            <p className='semPacientes'>Nenhum docente encontrado.</p>
+            <p className='semPacientes'>Nenhum Parentesco encontrado.</p>
           )}
         </div>
       </div>
