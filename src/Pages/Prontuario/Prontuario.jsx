@@ -4,10 +4,12 @@ import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useTheme } from '../../context/ThemeContext';
 
 const Prontuario = () => {
   const { id } = useParams();
   const [usuario, setUsuario] = useState(null);
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     axios.get(`http://localhost:5000/paciente/${id}`)
@@ -23,11 +25,15 @@ const Prontuario = () => {
     <>
       <Header />
       <br /><br /><br />
-      <div className='container-prontuario'>
+      <div className={`container-prontuario ${darkMode ? 'dark-mode' : ''}`}>
         <h2>Prontuário</h2>
         
         <div className="prontuario-top">
-          <img src={usuario.imagemGenero} alt="Imagem do Paciente" />
+          <img 
+            src={usuario.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')} 
+            alt="Imagem do Paciente" 
+            className={darkMode ? 'dark-img' : ''}
+          />
           
           <div className="prontuario-info">
             <div className="prontuario-col">
@@ -49,12 +55,11 @@ const Prontuario = () => {
           </div>
         </div>
 
-        {/* Seção de Observações */}
         <div className="prontuario-observacoes">
           <div className="observacao-group">
             <label>Problema relatado:</label>
             <textarea 
-              className="observacao-input"
+              className={`observacao-input ${darkMode ? 'dark-mode' : ''}`}
               rows="4"
               placeholder="Descreva o problema relatado pelo paciente..."
             />
@@ -63,19 +68,18 @@ const Prontuario = () => {
           <div className="observacao-group">
             <label>Recomendação Médica:</label>
             <textarea 
-              className="observacao-input"
+              className={`observacao-input ${darkMode ? 'dark-mode' : ''}`}
               rows="4"
               placeholder="Insira as recomendações médicas..."
             />
           </div>
         </div>
 
-        {/* Botões de Ação */}
         <div className="prontuario-actions">
-          <button className="btn-missing">
+          <button className={`btn-missing ${darkMode ? 'dark-mode' : ''}`}>
             Paciente não compareceu
           </button>
-          <button className="btn-finish">
+          <button className={`btn-finish ${darkMode ? 'dark-mode' : ''}`}>
             Finalizar Consulta
           </button>
         </div>

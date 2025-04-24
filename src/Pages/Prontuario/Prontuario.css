@@ -136,6 +136,136 @@
   background-color: #27ae60;
 }
 
+/* Prontuario.css */
+:root {
+  --background-primary: #ffffff;
+  --background-secondary: #f5f5f5;
+  --text-primary: #333;
+  --text-secondary: #2c3e50;
+  --border-color: #ecf0f1;
+  --input-bg: #ffffff;
+  --button-missing: #e74c3c;
+  --button-finish: #2ecc71;
+  --shadow-color: rgba(0, 0, 0, 0.281);
+}
+
+.dark-mode {
+  --background-primary: #1a1a1a;
+  --background-secondary: #2d2d2d;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --border-color: #404040;
+  --input-bg: #2d2d2d;
+  --button-missing: #8b1a27;
+  --button-finish: #1a5a2a;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+.container-prontuario {
+  max-width: 1600px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: var(--background-primary);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px var(--shadow-color);
+  font-family: 'Arial', sans-serif;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.container-prontuario h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.prontuario-top {
+  display: flex;
+  gap: 40px;
+  background-color: var(--background-secondary);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.prontuario-col p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 12px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.field-label {
+  font-weight: bold;
+  color: var(--text-secondary);
+}
+
+.prontuario-observacoes {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid var(--border-color);
+}
+
+.observacao-group label {
+  color: var(--text-secondary);
+}
+
+.observacao-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.observacao-input:focus {
+  border-color: var(--button-finish);
+  box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+}
+
+.prontuario-actions {
+  border-top: 2px solid var(--border-color);
+}
+
+.btn-missing {
+  background-color: var(--button-missing);
+}
+
+.btn-finish {
+  background-color: var(--button-finish);
+}
+
+.btn-missing:hover {
+  background-color: var(--button-missing);
+  filter: brightness(0.9);
+}
+
+.btn-finish:hover {
+  background-color: var(--button-finish);
+  filter: brightness(0.9);
+}
+
+.dark-mode .prontuario-top img {
+  filter: brightness(0.8);
+}
+
+@media (max-width: 768px) {
+  .prontuario-top {
+    flex-direction: column;
+  }
+  
+  .prontuario-top img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+  }
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .prontuario-actions {
