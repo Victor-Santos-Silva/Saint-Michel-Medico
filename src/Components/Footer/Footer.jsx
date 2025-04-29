@@ -16,7 +16,7 @@ export default function Footer() {
 
             <div>
                 <span>Parcerias estratégicas:</span> 
-                <strong>Libbs Pharmaceuticals</strong>
+                <strong>Libbs</strong>
                 <span style={{ fontSize: '0.8rem', opacity: 0.8 }}>Saúde e Inovação</span>
             </div>
 

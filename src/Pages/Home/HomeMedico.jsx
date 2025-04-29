@@ -6,16 +6,27 @@ import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function HomeMedico() {
   const [dataUsuarios, setDataUsuarios] = useState([]);
   const [dataDocentes, setDataDocentes] = useState([]);
   const { id } = useAuth();
-  const { darkMode, toggleTheme } = useTheme();
+  const { darkMode } = useTheme();
   const medicoLogadoId = id;
   
   const consultasRef = useRef(null);
   const parentescoRef = useRef(null);
+
+  // Inicializa AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 150,
+    });
+  }, []);
 
   const scrollLeft = (ref) => {
     if (ref.current) {
@@ -56,18 +67,21 @@ export default function HomeMedico() {
   return (
     <>
       <Header />
-      <br /><br /><br /><br />
       <div className={`corpo ${darkMode ? 'dark-mode' : ''}`}>
-        <div className={`imagensComeco ${darkMode ? 'dark-mode' : ''}`}>
+        <div className={`imagensComeco ${darkMode ? 'dark-mode' : ''}`} 
+             data-aos="fade-up"
+             data-aos-delay="200">
           <img 
-            className={`LogoVerde ${darkMode ? 'dark-mode' : ''}`} 
+            className='LogoVerde' 
             src="../src/Img/LogoVerde.png" 
             alt="Hospital Saint-Michel" 
+            data-aos="zoom-in"
+            data-aos-delay="300"
           />
-          <div>
+          <div data-aos="fade-up" data-aos-delay="400">
             <h2 className={`titulo ${darkMode ? 'dark-mode' : ''}`}>Consultas</h2>
           </div>
-          <div className={`lista-container ${darkMode ? 'dark-mode' : ''}`}>
+          <div className='lista-container' data-aos="fade-up" data-aos-delay="500">
             <button 
               className={`nav-button left ${darkMode ? 'dark-mode' : ''}`}
               onClick={() => scrollLeft(consultasRef)}
@@ -78,11 +92,15 @@ export default function HomeMedico() {
             <div className={`listaConsultas ${darkMode ? 'dark-mode' : ''}`} ref={consultasRef}>
               {dataUsuarios.length > 0 ? (
                 dataUsuarios.map((item, index) => (
-                  <div key={index} className={`consultaItem ${darkMode ? 'dark-mode' : ''}`}>
+                  <div 
+                    key={index} 
+                    className={`consultaItem ${darkMode ? 'dark-mode' : ''}`}
+                    data-aos="fade-right"
+                    data-aos-delay={300 + (index * 100)}
+                  >
                     <img 
-                      src={item.usuario?.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')} 
+                      src={item.usuario?.imagemGenero || '/imagens/default.png'} 
                       alt="Paciente" 
-                      className={darkMode ? 'dark-img' : ''}
                     />
                     <p>{item.usuario?.nomeCompleto || 'Nome não disponível'}</p>
                     <p>Data: {item.data || 'Data não informada'}</p>
@@ -110,11 +128,18 @@ export default function HomeMedico() {
             </button>
           </div>
         </div>
-        <br />
 
-        <div className={`imagensComeco ${darkMode ? 'dark-mode' : ''}`}>
-          <h2 className={`titulo ${darkMode ? 'dark-mode' : ''}`}>Consultas de Parentesco</h2>
-          <div className={`lista-container ${darkMode ? 'dark-mode' : ''}`}>
+        <div className={`imagensComeco ${darkMode ? 'dark-mode' : ''}`} 
+             data-aos="fade-up"
+             data-aos-delay="200">
+          <h2 
+            className={`titulo ${darkMode ? 'dark-mode' : ''}`}
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            Consultas de Parentesco
+          </h2>
+          <div className='lista-container' data-aos="fade-up" data-aos-delay="400">
             <button 
               className={`nav-button left ${darkMode ? 'dark-mode' : ''}`}
               onClick={() => scrollLeft(parentescoRef)}
@@ -125,11 +150,15 @@ export default function HomeMedico() {
             <div className={`listaConsultas ${darkMode ? 'dark-mode' : ''}`} ref={parentescoRef}>
               {dataDocentes.length > 0 ? (
                 dataDocentes.map((item, index) => (
-                  <div key={index} className={`consultaItem ${darkMode ? 'dark-mode' : ''}`}>
+                  <div 
+                    key={index} 
+                    className={`consultaItem ${darkMode ? 'dark-mode' : ''}`}
+                    data-aos="fade-left"
+                    data-aos-delay={300 + (index * 100)}
+                  >
                     <img 
-                      src={item.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')} 
+                      src={item.imagemGenero || '/imagens/default.png'} 
                       alt="Paciente" 
-                      className={darkMode ? 'dark-img' : ''}
                     />
                     <p>{item.nomeCompleto || 'Nome não disponível'}</p>
                     <p>Data: {item.data || 'Data não informada'}</p>
