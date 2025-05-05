@@ -28,48 +28,65 @@ const Prontuario = () => {
       .catch(error => console.error("Erro ao buscar usuário:", error));
   }, [id]);
 
-  const handlePostSubmit = (e) => {
+  const handlePostSubmit = async (e) => {
     e.preventDefault();
-    const prontuarioComUsuario = {
-      ...prontuarioData,
-      usuario_id: id, // id do paciente
-    };
 
-    axios.post(`${urlBase}/prontuario`, prontuarioComUsuario)
-      .then(response => {
-        setProntuario(response.data.prontuario);
-        alert("Prontuário criado com sucesso!");
+    try {
+      // Validação
+      if (!prontuarioData.problemaRelatado || !prontuarioData.recomendacaoMedico) {
+        return alert("Preencha todos os campos do prontuário!");
+      }
 
-        // Finalizar consulta e atualizar lista na homepage
-        axios.delete(`${urlBase}/agendamento/${id}`)
-          .then(() => {
-            // Chama a função passada para a remoção do paciente da lista de consultas
-            atualizarConsultas(id);
-            alert("Consulta finalizada e removida.");
-          })
-          .catch(error => {
-            console.error("Erro ao finalizar consulta:", error);
-          });
-      })
-      .catch(error => {
-        console.error("Erro ao criar prontuário:", error);
-        alert("Erro ao criar prontuário.");
+      // Cria prontuário
+      const prontuarioResponse = await axios.post(`${urlBase}/prontuario`, {
+        ...prontuarioData,
+        usuario_id: id
       });
+      setProntuario(prontuarioResponse.data.prontuario);
+
+      // Deleta agendamento
+      await axios.delete(`${urlBase}/agendamento/${id}`);
+
+      alert("Consulta finalizada e agendamento removido com sucesso!");
+      window.location.href = "/home";
+    } catch (error) {
+      console.error("Erro detalhado:", {
+        message: error.message,
+        response: error.response?.data
+      });
+
+      if (error.response?.status === 404) {
+        alert("Agendamento não encontrado");
+      } else {
+        alert(error.response?.data?.message || "Erro ao processar");
+      }
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm("Confirmar que o paciente não compareceu?")) return;
+  
+    try {
+      const response = await axios.delete(`${urlBase}/agendamento/${id}`);
+      console.log("Resposta:", response.data);
+      alert("Agendamento removido com sucesso!");
+      window.location.href = "/home";
+    } catch (error) {
+      console.error("Detalhes do erro:", {
+        status: error.response?.status,
+        data: error.response?.data,
+        message: error.message
+      });
+      
+      if (error.response?.status === 404) {
+        alert("Agendamento não encontrado");
+      } else {
+        alert(error.response?.data?.message || "Falha na comunicação com o servidor");
+      }
+    }
   };
 
 
-  const handleDelete = () => {
-    // Deletar prontuário
-    axios.delete(`${urlBase}/prontuario/${id}`)
-      .then(response => {
-        setProntuario(null); // Limpar o estado do prontuário após a exclusão
-        alert("Prontuário deletado com sucesso!");
-      })
-      .catch(error => {
-        console.error("Erro ao deletar prontuário:", error);
-        alert("Erro ao deletar prontuário.");
-      });
-  };
   // Associando os campos de texto ao estado
   const handleInputChange = (e) => {
     setProntuarioData({
