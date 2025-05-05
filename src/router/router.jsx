@@ -5,13 +5,14 @@ import Login from "../Pages/Login/Login";
 import Prontuario from "../Pages/Prontuario/Prontuario";
 import Historico from "../Pages/Historico/Historico";
 import ProntuarioDocente from "../Pages/Prontuario/ProntuarioDocente/ProntuarioDocente";
-
+import PerfilMedico from "../Pages/PerfilMédico/perfilMedico";
 const router = createBrowserRouter([
   { path: "/", element: <Login />, errorElement: <ErrorPage /> },
   { path: "/home", element: <HomeMedico /> },
   { path: "/prontuario/:id", element: <Prontuario /> },
   { path: "/prontuarioDocente/:id", element: <ProntuarioDocente /> },
-  { path: "/historico", element: <Historico /> }
+  { path: "/historico", element: <Historico /> },
+  { path: "/perfil", element: <PerfilMedico />}
 ]);
 
 export default router;

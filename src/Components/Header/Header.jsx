@@ -1,7 +1,7 @@
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { FaMoon, FaSun, FaUser } from 'react-icons/fa';
 import './Header.css';
 
 export default function Header() {
@@ -42,7 +42,10 @@ export default function Header() {
 
           {isLoggedIn && (
             <div className="perfil-usuario">
-              <span className="nome-usuario">{nomeCompleto}</span>
+              <Link to="/perfil" className="profile-link">
+                <FaUser className="profile-icon" />
+                <span className="nome-usuario">{nomeCompleto}</span>
+              </Link>
               <button 
                 onClick={logout} 
                 className="btn-sair-perfil"
