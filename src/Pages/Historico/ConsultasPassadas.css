@@ -1,0 +1,35 @@
+.consultas-container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 100%; /* Ocupa toda a largura */
+}
+
+.grid-prontuarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-top: 50px;
+  padding: 0 20px; /* Adiciona um pouco de espaço nas laterais */
+}
+
+.card-prontuario {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.card-prontuario:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.imagem-genero {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
