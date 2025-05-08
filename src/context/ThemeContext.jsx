@@ -9,15 +9,27 @@ export function ThemeProvider({ children }) {
   });
 
   useEffect(() => {
+    // Salva o tema no localStorage
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    document.body.classList.toggle('dark-mode', isDarkMode);
+    
+    // Aplica a classe ao body para todo o documento
+    document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
+    
+    // Adiciona/remove classes de tema em todos os elementos raiz
+    const rootElements = document.querySelectorAll('.theme-root');
+    rootElements.forEach(el => {
+      el.className = isDarkMode ? 'dark-mode theme-root' : 'light-mode theme-root';
+    });
+    
   }, [isDarkMode]);
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
-      {children}
+      <div className={`theme-root ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 }

@@ -36,14 +36,14 @@ export default function Header() {
               <FaMoon className="theme-icon" />
             )}
             <span className="theme-text">
-              {isDarkMode ? ' Modo Escuro' : ' Modo Claro'}
+              {isDarkMode ? '' : ''}
+            
             </span>
           </button>
 
           {isLoggedIn && (
             <div className="perfil-usuario">
               <Link to="/perfil" className="profile-link">
-                <FaUser className="profile-icon" />
                 <span className="nome-usuario">{nomeCompleto}</span>
               </Link>
               <button 
