@@ -1,131 +1,193 @@
-@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap');
+
 :root {
-    --primary-font: "Yeseva One", serif;
-    --second-font: "Ysabeau Infant", serif;
-    --color-dark-blue: #1F2B6C;
-    --color-dark-hover: #1f2b6ca8;
-    --color-light-blue: #159EEC;
-    --color-dark-gray: #333;
+  /* Cores principais */
+  --primary-color: #27ae60;
+  --primary-dark: #219653;
+  --primary-light: #6fcf97;
+  --accent-color: #2d9cdb;
+  --text-dark: #333333;
+  --text-light: #f2f2f2;
+  --bg-light: #ffffff;
+  --bg-dark: #121212;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --input-border: #e0e0e0;
+  --error-color: #eb5757;
+  --transition: all 0.3s ease;
 }
 
-.background {
-  font-family: var(--second-font);
-  background-image: url('../../Img/medicos.png');
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 100vh;
+/* Reset e estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+}
+
+/* Background principal */
+.login-container {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+              url('../../Img/medicos.png') no-repeat center center;
+  background-size: cover;
+  padding: 2rem;
 }
 
-.formularioLogin {
-  width: 400px;
-  padding: 30px;
-  background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
-  border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px); /* Efeito de desfoque */
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* Card do formulário */
+.login-card {
+  width: 30%;
+  padding: 2.5rem;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+/* Cabeçalho */
+.login-header {
   text-align: center;
+  margin-bottom: 2rem;
 }
 
-.formularioLogin h2 {
-  margin-bottom: 25px;
-  color: #ffffff;
-  font-size: 32px;
-  font-weight: bold;
-  letter-spacing: 1px;
+.login-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
 }
 
+.login-subtitle {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* Campos do formulário */
 .form-group {
-  margin-bottom: 20px;
-  text-align: left;
+  margin-bottom: 1.5rem;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #ffffff;
-  font-size: 16px;
+.form-label {
+ text-align: center;
+  margin-bottom: 0.5rem;
   font-weight: 500;
+  color: var(--primary-dark);
+  font-size: 0.95rem;
 }
 
-.form-control {
-  width: 100%;
-  padding: 12px;
-  font-size: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.form-input {
+  width: 40vh;
+  padding: 0.85rem 1.25rem;
+  font-size: 1rem;
+  border: 2px solid var(--input-border);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  transition: border-color 0.3s ease, background 0.3s ease;
+  background-color: #f9f9f9;
+  transition: var(--transition);
+  margin-left: -100px;
+
 }
 
-.form-control:focus {
-  border-color: #266b69;
-  background: rgba(255, 255, 255, 0.2);
+.form-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
   outline: none;
+  background-color: #fff;
 }
 
-.form-control.erro {
-  border-color: #ff4d4d;
+.form-input.erro {
+  border-color: var(--error-color);
 }
 
-.botaoEntrar {
+/* Botão de login */
+.login-button {
   width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #3c6b26, #5cbe1a);
-  color: #fff;
+  padding: 1rem;
+  background: var(--primary-color);
+  color: white;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: var(--transition);
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.botaoEntrar:hover {
-  background: linear-gradient(135deg, #325f15, #4f9e1a);
+.login-button:hover {
+  background: var(--primary-dark);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
 }
 
-.botaoEntrar:active {
+.login-button:active {
   transform: translateY(0);
+}
+
+/* Rodapé do card */
+.login-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .formularioLogin {
-    width: 90%;
-    padding: 20px;
+  .login-container {
+    padding: 1.5rem;
   }
-
-  .formularioLogin h2 {
-    font-size: 20px;
+  
+  .login-card {
+    padding: 2rem;
   }
-
-  .form-control,
-  .botaoEntrar {
-    font-size: 14px;
-    padding: 10px;
+  
+  .login-title {
+    font-size: 1.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .formularioLogin {
-    padding: 15px;
+  .login-card {
+    padding: 1.5rem;
   }
-
-  .formularioLogin h2 {
-    font-size: 18px;
+  
+  .login-title {
+    font-size: 1.6rem;
   }
-
-  .form-control,
-  .botaoEntrar {
-    font-size: 12px;
-    padding: 8px;
+  
+  .form-input {
+    padding: 0.75rem 1rem;
   }
 }

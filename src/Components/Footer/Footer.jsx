@@ -7,7 +7,7 @@ export default function Footer() {
     return (
         <footer className='footerMedico'>
             <img 
-                src="src/Img/FooterLogo.png" 
+                src="../src/Img/FooterLogo.png" 
                 alt="Logo do Hospital Saint-Michel" 
                 className='img-footeer' 
             />
