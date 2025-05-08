@@ -1,192 +1,224 @@
 @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap');
 
 :root {
-    --primary-font: "Yeseva One", serif;
-    --second-font: "Ysabeau Infant", serif;
-    --color-dark-blue: #1F2B6C;
-    --color-dark-hover: #1f2b6ca8;
-    --color-blue-contact: #0056b3;
-    --color-hover: #4b5dff9d;
-    --color-cadastro-hover: #4687ff;
-    --color-text: #fff;
-    --color-top-gray: #4a4a4a;
-  }
+  --primary-font: "Yeseva One", serif;
+  --second-font: "Ysabeau Infant", serif;
+  --color-dark-blue: #1F2B6C;
+  --color-blue-contact: #24b300;
+  --color-text: #333;
+  --color-top-gray: #4a4a4a;
+  --background-primary: #ffffff;
+  --background-secondary: #f5f5f5;
+  --border-color: #ddd;
+}
 
+/* Modo Escuro */
+.dark-mode {
+  --color-text: #e0e0e0;
+  --background-primary: #121212;
+  --background-secondary: #1e1e1e;
+  --border-color: #333;
+}
 
 .corpo {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--background-primary);
+  color: var(--color-text);
+  margin-bottom: 6%;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
 }
-
-
-.consultas-container {
-  text-align: center;
-  padding: 20px;
-}
-
-body {
-  background-color: #e0ded9;
-}
-
-.LogoVerde {
-  margin: auto;
-  width: 100%;
-  display: flex;
-}
-
-.titulo-consultas {
-  font-size: 24px;
-  font-weight: bold;
-  font-family: var(--second-font);
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.grid-consultas {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  /* 3 colunas */
-  gap: 20px;
-  /* Espaçamento entre os cards */
-  justify-content: center;
-  padding: 20px;
-}
-
-.card-consulta {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  height: 600px;
-  padding: 15px;
-  transition: transform 0.2s ease-in-out;
-}
-
-.card-consulta:hover {
-  transform: scale(1.05);
-}
-
-.imagem-paciente {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.nome-paciente {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.btn-perfil {
-  background-color: #555;
-  color: white;
-  padding: 10px 12px;
-  border: none;
-  margin-top: 78%;
-  width: 100%;
-  height: 50vh;
-}
-
 
 .titulo {
-  color: #252525;
+  font-family: var(--primary-font);
   text-align: center;
   margin-top: 20px;
   font-size: 40px;
+  color: var(--color-text);
 }
 
-.form-group {
+.lista-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin: 20px 0;
+  transition: all 0.3s;
+}
+
+.listaConsultas {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px 0;
+  margin: 20px 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.listaConsultas::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cards Modernizados */
+.consultaItem {
+  background: linear-gradient(145deg, var(--background-primary) 0%, var(--background-secondary) 100%);
+  color: var(--color-text);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  min-width: 280px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
-  width: 200px;
-  margin: auto;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
-label {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  font-size: 20px;
-  font-style: italic;
-}
-
-/* Container da lista de consultas */
-.listaConsultas {
-  margin: 20px;
-  gap: 20px;
-  display: flex;
-  text-align: center;
-}
-
-/* Item da consulta */
-.consultaItem {
-  background-color: #ffffff;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.692);
-  /* Linha lateral para destaque */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.consultaItem::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: rotate(45deg);
+  pointer-events: none;
 }
 
 .consultaItem:hover {
-  transform: translateY(-2px);
-  /* Efeito de levantar ao passar o mouse */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.consultaItem:hover::before {
+  animation: shine 1.5s;
+}
+
+@keyframes shine {
+  0% { left: -50%; }
+  100% { left: 150%; }
 }
 
 .consultaItem p {
   margin: 5px 0;
   font-family: var(--second-font);
-  font-weight: bold;
   font-size: 16px;
-  color: #333;
+  position: relative;
+  z-index: 1;
 }
 
-.consultaItem p:first-child {
-  font-weight: bold;
-  color: #00796b;
-  /* Cor destacada para a data */
+.consultaItem p:first-of-type {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  position: relative;
 }
 
-/* Mensagem quando não há consultas */
-.semPacientes {
-  font-size: 18px;
-  color: #666;
-  text-align: center;
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
+.consultaItem p:first-of-type::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--color-dark-blue);
+  border-radius: 2px;
 }
 
+.dark-mode .consultaItem {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .consultaItem p:first-of-type::after {
+  background: var(--color-blue-contact);
+}
+
+/* Botão Modernizado */
 .button-prontuario {
   display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 12px 25px;
+  font-size: 14px;
+  font-weight: 600;
   color: #fff;
-  background-color: #0c8333;
+  background: linear-gradient(135deg, #0c8333 0%, #1a9f4d 100%);
   border: none;
-  border-radius: 5px;
-  text-align: center;
+  border-radius: 8px;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  margin-top: 15px;
+  letter-spacing: 0.5px;
 }
 
 .button-prontuario:hover {
-  background-color: #003813;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(12, 131, 51, 0.3);
 }
 
-.button-prontuario:active {
-  background-color: #005a4f;
+.dark-mode .button-prontuario {
+  background: linear-gradient(135deg, #2d862f 0%, #3aa352 100%);
+  font-family: var(--second-font);
+  font-size: 18px;
 }
 
-.container-prontuario{
-  margin-top: 1000px;
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.dark-mode .nav-button {
+  background-color: #333;
+  color: white;
+  border-color: #444;
+}
+
+.nav-button:hover {
+  background-color: #ddd;
+}
+
+.dark-mode .nav-button:hover {
+  background-color: #444;
+}
+
+.nav-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.semPacientes {
+  font-size: 18px;
+  color: #666;
+  padding: 20px;
+  text-align: center;
+}
+
+.dark-mode .semPacientes {
+  color: #ccc;
 }

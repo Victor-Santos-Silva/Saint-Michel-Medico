@@ -24,7 +24,7 @@
     top: 0;
     z-index: 1000;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid #159EEC;
+    border-bottom: 2px solid #146600;
 }
 
 .logoHeader {
@@ -36,7 +36,7 @@
 }
 
 .imgHeader {
-    width: 180px;
+    width: 200px;
     height: auto;
     transition: filter 0.3s ease;
 }
@@ -148,4 +148,76 @@
     .nome-usuario {
         display: none;
     }
+}/* Header.css */
+.headerMedico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  transition: background-color 0.3s, color 0.3s;
 }
+
+/* Modo Claro */
+.light-mode {
+  background-color: #f8f9fa;
+  color: #ffffff;
+}
+
+/* Modo Escuro */
+.dark-mode {
+  background-color: #2d2d2d;
+  color: #ffffff;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  color: inherit;
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+}
+
+.theme-text {
+  font-size: 0.9rem;
+}
+
+/* Mantenha o restante dos estilos originais */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.perfil-usuario {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-sair-perfil {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-sair-perfil:hover {
+  background-color: #c0392b;
+}
+
