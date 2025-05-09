@@ -8,11 +8,19 @@ import { useParams } from 'react-router-dom';
 const Prontuario = () => {
   const { id } = useParams();
   const [usuario, setUsuario] = useState(null);
+  const [problemaRelatado, setProblemaRelatado] = useState('');
+  const [recomendacaoMedica, setRecomendacaoMedica] = useState('');
 
   useEffect(() => {
     axios.get(`http://localhost:5000/agendamentoDocente/${id}`)
       .then(response => {
-        setUsuario(response.data.AgendamentosDocentes);
+        const dados = response.data.AgendamentosDocentes;
+        setUsuario(dados);
+
+        if (dados.Prontuario) {
+          setProblemaRelatado(dados.Prontuario.problemaRelatado || '');
+          setRecomendacaoMedica(dados.Prontuario.recomendacaoMedico || '');
+        }
       })
       .catch(error => console.error("Erro ao buscar prontuário:", error));
   }, [id]);
@@ -25,10 +33,10 @@ const Prontuario = () => {
       <br /><br /><br />
       <div className='container-prontuario'>
         <h2>Prontuário</h2>
-        
+
         <div className="prontuario-top">
           <img src={usuario.imagemGenero} alt="Imagem do Paciente" />
-          
+
           <div className="prontuario-info">
             <div className="prontuario-col">
               <p><span className="field-label">Nome Completo:</span> {usuario.nomeCompleto}</p>
@@ -38,7 +46,7 @@ const Prontuario = () => {
               <p><span className="field-label">Endereço:</span> {usuario.endereco}</p>
               <p><span className="field-label">Telefone:</span> {usuario.telefone}</p>
             </div>
-            
+
             <div className="prontuario-col">
               <p><span className="field-label">Email:</span> {usuario.email}</p>
               <p><span className="field-label">Gênero:</span> {usuario.genero}</p>
@@ -53,19 +61,23 @@ const Prontuario = () => {
         <div className="prontuario-observacoes">
           <div className="observacao-group">
             <label>Problema relatado:</label>
-            <textarea 
+            <textarea
               className="observacao-input"
               rows="4"
               placeholder="Descreva o problema relatado pelo paciente..."
+              value={problemaRelatado}
+              onChange={e => setProblemaRelatado(e.target.value)}
             />
           </div>
 
           <div className="observacao-group">
             <label>Recomendação Médica:</label>
-            <textarea 
+            <textarea
               className="observacao-input"
               rows="4"
               placeholder="Insira as recomendações médicas..."
+              value={recomendacaoMedica}
+              onChange={e => setRecomendacaoMedica(e.target.value)}
             />
           </div>
         </div>

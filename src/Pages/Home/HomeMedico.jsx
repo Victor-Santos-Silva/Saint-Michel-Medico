@@ -15,7 +15,7 @@ export default function HomeMedico() {
   const { id } = useAuth();
   const { darkMode } = useTheme();
   const medicoLogadoId = id;
-  
+
   const consultasRef = useRef(null);
   const parentescoRef = useRef(null);
 
@@ -44,7 +44,10 @@ export default function HomeMedico() {
     axios.get(`http://localhost:5000/agendamento/listar?medico_id=${medicoLogadoId}`)
       .then(response => {
         if (response.data && Array.isArray(response.data)) {
-          setDataUsuarios(response.data);
+          const agendamentosFiltrados = response.data.filter(agendamento =>
+            agendamento.status !== 'finalizado' && agendamento.status !== 'nao_compareceu'
+          );
+          setDataUsuarios(agendamentosFiltrados);
         }
       })
       .catch(error => {
@@ -55,12 +58,21 @@ export default function HomeMedico() {
   useEffect(() => {
     axios.get(`http://localhost:5000/agendamentoDocente/agendamentoGeralDocente?medico_id=${medicoLogadoId}`)
       .then(response => {
+        console.log("Dados brutos da API:", response.data);
+
         if (response.data && Array.isArray(response.data.agendamentoDocentes)) {
-          setDataDocentes(response.data.agendamentoDocentes);
+          const agendamentosFiltrados = response.data.agendamentoDocentes.filter(agendamento =>
+            agendamento.status !== 'finalizado' && agendamento.status !== 'nao_compareceu'
+          );
+
+          console.log("Agendamentos filtrados:", agendamentosFiltrados);
+          setDataDocentes(agendamentosFiltrados);
+        } else {
+          console.log("Resposta inesperada:", response.data);
         }
       })
       .catch(error => {
-        console.error("Erro ao buscar agendamentos de docentes:", error);
+        console.error("Erro ao buscar dados dos docentes:", error);
       });
   }, [medicoLogadoId]);
 
@@ -68,13 +80,13 @@ export default function HomeMedico() {
     <>
       <Header />
       <div className={`corpo ${darkMode ? 'dark-mode' : ''}`}>
-        <div className={`imagensComeco ${darkMode ? 'dark-mode' : ''}`} 
-             data-aos="fade-up"
-             data-aos-delay="200">
-          <img 
-            className='LogoVerde' 
-            src="../src/Img/LogoVerde.png" 
-            alt="Hospital Saint-Michel" 
+        <div className={`imagensComeco ${darkMode ? 'dark-mode' : ''}`}
+          data-aos="fade-up"
+          data-aos-delay="200">
+          <img
+            className='LogoVerde'
+            src="../src/Img/LogoVerde.png"
+            alt="Hospital Saint-Michel"
             data-aos="zoom-in"
             data-aos-delay="300"
           />
@@ -82,7 +94,7 @@ export default function HomeMedico() {
             <h2 className={`titulo ${darkMode ? 'dark-mode' : ''}`}>Consultas</h2>
           </div>
           <div className='lista-container' data-aos="fade-up" data-aos-delay="500">
-            <button 
+            <button
               className={`nav-button left ${darkMode ? 'dark-mode' : ''}`}
               onClick={() => scrollLeft(consultasRef)}
               disabled={dataUsuarios.length <= 3}
@@ -90,36 +102,38 @@ export default function HomeMedico() {
               &lt;
             </button>
             <div className={`listaConsultas ${darkMode ? 'dark-mode' : ''}`} ref={consultasRef}>
-              {dataUsuarios.length > 0 ? (
-                dataUsuarios.map((item, index) => (
-                  <div 
-                    key={index} 
-                    className={`consultaItem ${darkMode ? 'dark-mode' : ''}`}
-                    data-aos="fade-right"
-                    data-aos-delay={300 + (index * 100)}
-                  >
-                    <img 
-                      src={item.usuario?.imagemGenero || '/imagens/default.png'} 
-                      alt="Paciente" 
-                    />
-                    <p>{item.usuario?.nomeCompleto || 'Nome não disponível'}</p>
-                    <p>Data: {item.data || 'Data não informada'}</p>
-                    <p>Hora: {item.hora || 'Hora não informada'}</p>
-                    {item.usuario?.id && (
-                      <Link 
-                        className={`button-prontuario ${darkMode ? 'dark-mode' : ''}`} 
-                        to={`/prontuario/${item.usuario.id}`}
-                      >
-                        Prontuário
-                      </Link>
-                    )}
-                  </div>
-                ))
+              {dataUsuarios.filter(a => a.status !== 'nao_compareceu' && a.status !== 'finalizado').length > 0 ? (
+                dataUsuarios
+                  .filter(a => a.status !== 'nao_compareceu' && a.status !== 'finalizado')
+                  .map((item, index) => (
+                    <div
+                      key={index}
+                      className={`consultaItem ${darkMode ? 'dark-mode' : ''}`}
+                      data-aos="fade-right"
+                      data-aos-delay={300 + (index * 100)}
+                    >
+                      <img
+                        src={item.usuario?.imagemGenero || '/imagens/default.png'}
+                        alt="Paciente"
+                      />
+                      <p>{item.usuario?.nomeCompleto || 'Nome não disponível'}</p>
+                      <p>Data: {item.data || 'Data não informada'}</p>
+                      <p>Hora: {item.hora || 'Hora não informada'}</p>
+                      {item.usuario?.id && (
+                        <Link
+                          className={`button-prontuario ${darkMode ? 'dark-mode' : ''}`}
+                          to={`/prontuario/${item.id}`}
+                        >
+                          Prontuário
+                        </Link>
+                      )}
+                    </div>
+                  ))
               ) : (
                 <p className={`semPacientes ${darkMode ? 'dark-mode' : ''}`}>Nenhum paciente encontrado.</p>
               )}
             </div>
-            <button 
+            <button
               className={`nav-button right ${darkMode ? 'dark-mode' : ''}`}
               onClick={() => scrollRight(consultasRef)}
               disabled={dataUsuarios.length <= 3}
@@ -129,10 +143,10 @@ export default function HomeMedico() {
           </div>
         </div>
 
-        <div className={`imagensComeco ${darkMode ? 'dark-mode' : ''}`} 
-             data-aos="fade-up"
-             data-aos-delay="200">
-          <h2 
+        <div className={`imagensComeco ${darkMode ? 'dark-mode' : ''}`}
+          data-aos="fade-up"
+          data-aos-delay="200">
+          <h2
             className={`titulo ${darkMode ? 'dark-mode' : ''}`}
             data-aos="fade-up"
             data-aos-delay="300"
@@ -140,7 +154,7 @@ export default function HomeMedico() {
             Consultas de Parentesco
           </h2>
           <div className='lista-container' data-aos="fade-up" data-aos-delay="400">
-            <button 
+            <button
               className={`nav-button left ${darkMode ? 'dark-mode' : ''}`}
               onClick={() => scrollLeft(parentescoRef)}
               disabled={dataDocentes.length <= 3}
@@ -150,22 +164,22 @@ export default function HomeMedico() {
             <div className={`listaConsultas ${darkMode ? 'dark-mode' : ''}`} ref={parentescoRef}>
               {dataDocentes.length > 0 ? (
                 dataDocentes.map((item, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className={`consultaItem ${darkMode ? 'dark-mode' : ''}`}
                     data-aos="fade-left"
                     data-aos-delay={300 + (index * 100)}
                   >
-                    <img 
-                      src={item.imagemGenero || '/imagens/default.png'} 
-                      alt="Paciente" 
+                    <img
+                      src={item.imagemGenero || '/imagens/default.png'}
+                      alt="Docente"
                     />
                     <p>{item.nomeCompleto || 'Nome não disponível'}</p>
                     <p>Data: {item.data || 'Data não informada'}</p>
                     <p>Hora: {item.hora || 'Hora não informada'}</p>
                     {item.id && (
-                      <Link 
-                        className={`button-prontuario ${darkMode ? 'dark-mode' : ''}`} 
+                      <Link
+                        className={`button-prontuario ${darkMode ? 'dark-mode' : ''}`}
                         to={`/prontuarioDocente/${item.id}`}
                       >
                         Prontuário
@@ -177,7 +191,8 @@ export default function HomeMedico() {
                 <p className={`semPacientes ${darkMode ? 'dark-mode' : ''}`}>Nenhum Parentesco encontrado.</p>
               )}
             </div>
-            <button 
+
+            <button
               className={`nav-button right ${darkMode ? 'dark-mode' : ''}`}
               onClick={() => scrollRight(parentescoRef)}
               disabled={dataDocentes.length <= 3}

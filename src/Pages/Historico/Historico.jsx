@@ -13,9 +13,11 @@ export default function Historico() {
   const [prontuarios, setProntuarios] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/prontuario")
+    axios.get("http://localhost:5000/consulta/historico")
       .then(response => {
-        setProntuarios(response.data.prontuario); // Extrai o array da resposta
+        console.log(response.data); // Verifica a estrutura da resposta
+
+        setProntuarios(response.data); // Extrai o array da resposta
       })
       .catch(error => {
         console.error("Erro ao buscar consultas passadas de usuários:", error);
@@ -38,10 +40,19 @@ export default function Historico() {
                   alt={`Foto de ${item.usuario.nomeCompleto}`}
                   className="imagem-genero"
                 />
-                <p><strong>Paciente:</strong> {item.usuario.nomeCompleto}</p>
-                <p><strong>Problema:</strong> {item.problemaRelatado || "Não informado"}</p>
-                <p><strong>Recomendação:</strong> {item.recomendacaoMedico || "Não informada"}</p>
-                <p><strong>Data:</strong> {new Date(item.createdAt).toLocaleDateString()}</p>
+                <p className='testoTeste'><strong>Paciente:</strong> {item.usuario.nomeCompleto}</p>
+                <p className='testoTeste'>
+                  <strong>Problema:</strong> {item.Prontuario?.problemaRelatado || "Não informado"}
+                </p>
+                <p className='testoTeste'>
+                  <strong>Recomendação:</strong> {item.Prontuario?.recomendacaoMedico || "Não informada"}
+                </p>
+                <p className='testoTeste'>
+                  <strong>Status:</strong> {item.status || "Não informada"}
+                </p>
+                <p className='testoTeste'>
+                  <strong>Data:</strong> {item.Prontuario?.createdAt ? new Date(item.Prontuario.createdAt).toLocaleDateString() : "Não informada"}
+                </p>
               </div>
             ))}
           </div>

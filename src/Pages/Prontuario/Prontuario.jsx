@@ -8,84 +8,62 @@ import { useTheme } from '../../context/ThemeContext';
 
 const Prontuario = () => {
   const { darkMode } = useTheme();
-
-  const { id } = useParams();
+  const { id } = useParams();  // Agendamento ID
   const [usuario, setUsuario] = useState(null);
-  const [prontuario, setProntuario] = useState(null);
   const [prontuarioData, setProntuarioData] = useState({
     problemaRelatado: '',
     recomendacaoMedico: '',
   });
 
-  const urlBase = 'http://localhost:5000'
+  const urlBase = 'http://localhost:5000';
 
   useEffect(() => {
-    // Buscar dados do usuário
-    axios.get(`${urlBase}/paciente/${id}`)
+    axios.get(`${urlBase}/agendamento/${id}`)
       .then(response => {
-        setUsuario(response.data.usuario);
+        const agendamento = response.data.AgendamentosUsuarios;
+        setUsuario(agendamento.usuario);
+        console.log("Dados do agendamento:", agendamento);
+        
       })
-      .catch(error => console.error("Erro ao buscar usuário:", error));
+      .catch(error => console.error("Erro ao buscar agendamento:", error));
   }, [id]);
 
-  const handlePostSubmit = async (e) => {
+
+  const handleFinalizarConsulta = async (e) => {
     e.preventDefault();
 
     try {
-      // Validação
       if (!prontuarioData.problemaRelatado || !prontuarioData.recomendacaoMedico) {
         return alert("Preencha todos os campos do prontuário!");
       }
 
-      // Cria prontuário
-      const prontuarioResponse = await axios.post(`${urlBase}/prontuario`, {
-        ...prontuarioData,
-        usuario_id: id
+      await axios.post(`${urlBase}/consulta/concluir`, {
+        agendamento_id: id,
+        ...prontuarioData
       });
-      setProntuario(prontuarioResponse.data.prontuario);
+      console.log("ID enviado:", id);
 
-      // Deleta agendamento
-      await axios.delete(`${urlBase}/agendamento/${id}`);
-
-      alert("Consulta finalizada e agendamento removido com sucesso!");
+      alert("Consulta finalizada com sucesso!");
       window.location.href = "/home";
     } catch (error) {
-      console.error("Erro detalhado:", {
-        message: error.message,
-        response: error.response?.data
-      });
-
-      if (error.response?.status === 404) {
-        alert("Agendamento não encontrado");
-      } else {
-        alert(error.response?.data?.message || "Erro ao processar");
-      }
+      console.error("Erro ao finalizar consulta:", error);
+      alert("Erro ao finalizar consulta.");
     }
   };
 
-  const handleDelete = async () => {
-    if (!window.confirm("Confirmar que o paciente não compareceu?")) return;
-  
+  const handleNaoCompareceu = async () => {
     try {
-      const response = await axios.delete(`${urlBase}/agendamento/${id}`);
-      console.log("Resposta:", response.data);
-      alert("Agendamento removido com sucesso!");
+      await axios.post(`${urlBase}/consulta/nao-compareceu`, {
+        agendamento_id: id
+      });
+
+      alert("Paciente não compareceu!");
       window.location.href = "/home";
     } catch (error) {
-      console.error("Detalhes do erro:", {
-        status: error.response?.status,
-        data: error.response?.data,
-        message: error.message
-      });
-      
-      if (error.response?.status === 404) {
-        alert("Agendamento não encontrado");
-      } else {
-        alert(error.response?.data?.message || "Falha na comunicação com o servidor");
-      }
+      console.error("Erro ao marcar como não comparecido:", error);
+      alert("Erro ao processar.");
     }
   };
-
 
   // Associando os campos de texto ao estado
   const handleInputChange = (e) => {
@@ -158,10 +136,10 @@ const Prontuario = () => {
         </div>
 
         <div className="prontuario-actions">
-          <button className={`btn-missing ${darkMode ? 'dark-mode' : ''}`} onClick={handleDelete}>
+          <button className={`btn-missing ${darkMode ? 'dark-mode' : ''}`} onClick={handleNaoCompareceu}>
             Paciente não compareceu
           </button>
-          <button className={`btn-finish ${darkMode ? 'dark-mode' : ''}`} onClick={handlePostSubmit}>
+          <button className={`btn-finish ${darkMode ? 'dark-mode' : ''}`} onClick={handleFinalizarConsulta}>
             Finalizar Consulta
           </button>
         </div>
