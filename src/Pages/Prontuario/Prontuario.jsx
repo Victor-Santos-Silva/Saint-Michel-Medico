@@ -23,7 +23,7 @@ const Prontuario = () => {
         const agendamento = response.data.AgendamentosUsuarios;
         setUsuario(agendamento.usuario);
         console.log("Dados do agendamento:", agendamento);
-        
+
       })
       .catch(error => console.error("Erro ao buscar agendamento:", error));
   }, [id]);
@@ -41,8 +41,6 @@ const Prontuario = () => {
         agendamento_id: id,
         ...prontuarioData
       });
-      console.log("ID enviado:", id);
-
       alert("Consulta finalizada com sucesso!");
       window.location.href = "/home";
     } catch (error) {

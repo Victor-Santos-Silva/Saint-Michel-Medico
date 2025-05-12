@@ -4,26 +4,71 @@ import Header from '../../../Components/Header/Header';
 import Footer from '../../../Components/Footer/Footer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Prontuario = () => {
-  const { id } = useParams();
+  const { darkMode } = useTheme();
+  const { id } = useParams();  // Agendamento ID
   const [usuario, setUsuario] = useState(null);
-  const [problemaRelatado, setProblemaRelatado] = useState('');
-  const [recomendacaoMedica, setRecomendacaoMedica] = useState('');
+  const [prontuarioData, setProntuarioData] = useState({
+    problemaRelatado: '',
+    recomendacaoMedico: '',
+  });
+
+  const urlBase = 'http://localhost:5000';
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/agendamentoDocente/${id}`)
+    axios.get(`${urlBase}/agendamentoDocente/${id}`)
       .then(response => {
-        const dados = response.data.AgendamentosDocentes;
-        setUsuario(dados);
-
-        if (dados.Prontuario) {
-          setProblemaRelatado(dados.Prontuario.problemaRelatado || '');
-          setRecomendacaoMedica(dados.Prontuario.recomendacaoMedico || '');
-        }
+        const agendamento = response.data.AgendamentosDocentes;
+        setUsuario(agendamento); // Aqui!
+        console.log("Dados do agendamento:", agendamento);
       })
-      .catch(error => console.error("Erro ao buscar prontuário:", error));
+      .catch(error => console.error("Erro ao buscar agendamento:", error));
   }, [id]);
+
+
+  const handleFinalizarConsulta = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (!prontuarioData.problemaRelatado || !prontuarioData.recomendacaoMedico) {
+        return alert("Preencha todos os campos do prontuário!");
+      }
+
+      await axios.post(`${urlBase}/consultaDocente/concluir-parente`, {
+        agendamento_id: id,
+        ...prontuarioData
+      });
+      alert("Consulta finalizada com sucesso!");
+      window.location.href = "/home";
+    } catch (error) {
+      console.error("Erro ao finalizar consulta:", error);
+      alert("Erro ao finalizar consulta.");
+    }
+  };
+
+  const handleNaoCompareceu = async () => {
+    try {
+      await axios.post(`${urlBase}/consultaDocente/nao-compareceu-parente`, {
+        agendamento_id: id
+      });
+
+      alert("Paciente não compareceu!");
+      window.location.href = "/home";
+    } catch (error) {
+      console.error("Erro ao marcar como não comparecido:", error);
+      alert("Erro ao processar.");
+    }
+  };
+
+  // Associando os campos de texto ao estado
+  const handleInputChange = (e) => {
+    setProntuarioData({
+      ...prontuarioData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   if (!usuario) return <p>Carregando...</p>;
 
@@ -31,11 +76,15 @@ const Prontuario = () => {
     <>
       <Header />
       <br /><br /><br />
-      <div className='container-prontuario'>
+      <div className={`container-prontuario ${darkMode ? 'dark-mode' : ''}`}>
         <h2>Prontuário</h2>
 
         <div className="prontuario-top">
-          <img src={usuario.imagemGenero} alt="Imagem do Paciente" />
+          <img
+            src={usuario.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
+            alt="Imagem do Paciente"
+            className={darkMode ? 'dark-img' : ''}
+          />
 
           <div className="prontuario-info">
             <div className="prontuario-col">
@@ -57,37 +106,37 @@ const Prontuario = () => {
           </div>
         </div>
 
-        {/* Seção de Observações */}
         <div className="prontuario-observacoes">
           <div className="observacao-group">
             <label>Problema relatado:</label>
             <textarea
-              className="observacao-input"
+              className={`observacao-input ${darkMode ? 'dark-mode' : ''}`}
               rows="4"
+              name="problemaRelatado"
+              value={prontuarioData.problemaRelatado}
+              onChange={handleInputChange}
               placeholder="Descreva o problema relatado pelo paciente..."
-              value={problemaRelatado}
-              onChange={e => setProblemaRelatado(e.target.value)}
             />
           </div>
 
           <div className="observacao-group">
             <label>Recomendação Médica:</label>
             <textarea
-              className="observacao-input"
+              className={`observacao-input ${darkMode ? 'dark-mode' : ''}`}
               rows="4"
+              name="recomendacaoMedico"
+              value={prontuarioData.recomendacaoMedico}
+              onChange={handleInputChange}
               placeholder="Insira as recomendações médicas..."
-              value={recomendacaoMedica}
-              onChange={e => setRecomendacaoMedica(e.target.value)}
             />
           </div>
         </div>
 
-        {/* Botões de Ação */}
         <div className="prontuario-actions">
-          <button className="btn-missing">
+          <button className={`btn-missing ${darkMode ? 'dark-mode' : ''}`} onClick={handleNaoCompareceu}>
             Paciente não compareceu
           </button>
-          <button className="btn-finish">
+          <button className={`btn-finish ${darkMode ? 'dark-mode' : ''}`} onClick={handleFinalizarConsulta}>
             Finalizar Consulta
           </button>
         </div>
