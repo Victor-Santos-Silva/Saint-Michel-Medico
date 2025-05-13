@@ -18,7 +18,7 @@
     background: linear-gradient(145deg, #0c8333, #1b522d);
     color: white;
     padding: 0 5%;
-    height: 80px;
+    height: 150px;
     width: 100%;
     position: fixed;
     top: 0;
@@ -36,7 +36,7 @@
 }
 
 .imgHeader {
-    width: 200px;
+    width: 400px;
     height: auto;
     transition: filter 0.3s ease;
 }
@@ -56,12 +56,13 @@
 .links {
     font-family: 'Ysabeau Infant', sans-serif;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: white;
     text-decoration: none;
     position: relative;
     padding: 5px 0;
     transition: color 0.3s ease;
+
 }
 
 .links::after {
