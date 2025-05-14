@@ -1,315 +1,162 @@
-/* Container principal */
+/* container principal */
 .container-prontuario {
-  max-width: 1600px;
-  margin: 30px auto;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.281);
-  font-family: 'Arial', sans-serif;
-  color: #333;
-  min-height: calc(100vh - 300px); /* Ajuste conforme necessário */
-  position: relative;
-  padding-bottom: 100px; /* Espaço para o footer */
+    max-width: 1000px;
+    margin: 180px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease-in-out;
 }
 
-/* Título */
+.container-prontuario.dark-mode {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+/* título */
 .container-prontuario h2 {
-  font-size: 28px;
-  font-weight: 600;
-  color: #2c3e50;
-  text-align: center;
-  margin-bottom: 25px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+.titleProntuario{
+    color: #4caf50;
+}
+/* imagem e colunas */
+.prontuario-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
-/* Layout superior */
-/* Ajustes no CSS */
-.prontuario-top {
-  display: flex;
-  gap: 40px;
+.prontuario-top img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4caf50;
+}
+
+.prontuario-top .dark-img {
+    border-color: #81c784;
 }
 
 .prontuario-info {
-  flex: 1;
-  display: flex;
-  gap: 40px;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.prontuario-info p {
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #333;
+    /* cor base */
+}
+
+.prontuario-info .field-label {
+    color: #2e7d32;
+    /* verde escuro para os rótulos */
+    font-weight: bold;
+}
+
+.dark-mode .prontuario-info p {
+    color: #ddd;
+}
+
+.dark-mode .prontuario-info .field-label {
+    color: #81c784;
+    /* verde claro no modo escuro */
 }
 
 .prontuario-col {
-  flex: 1;
-}
-
-.prontuario-col p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #555;
-  margin: 12px 0;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #ecf0f1;
-}
-
-.prontuario-col p:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+    flex: 1;
+    min-width: 200px;
 }
 
 .field-label {
-  font-weight: bold;
-  color: #333;
-  display: inline-block;
+    font-weight: bold;
+    margin-right: 6px;
+    color: #1e1e1e;
 }
 
-/* Estilos para as novas seções */
-/* Ajustes de posicionamento */
+/* observações */
 .prontuario-observacoes {
-  margin-top: 40px;
-  padding-top: 30px;
-  border-top: 2px solid #ecf0f1;
+    margin-bottom: 40px;
 }
-
-.prontuario-actions {
-  margin-top: 30px;
-  padding-top: 25px;
-}
-
-/* Mantenha o restante do CSS igual */
 
 .observacao-group {
-  margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .observacao-group label {
-  display: block;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 10px;
-  font-size: 16px;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
 .observacao-input {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #bdc3c7;
-  border-radius: 8px;
-  font-family: 'Arial', sans-serif;
-  font-size: 14px;
-  min-height: 100px;
-  resize: vertical;
-}
-
-.observacao-input:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
-}
-
-.prontuario-actions {
-  margin-top: 30px;
-  display: flex;
-  gap: 20px;
-  justify-content: flex-end;
-  border-top: 2px solid #ecf0f1;
-  padding-top: 25px;
-}
-
-.btn-missing, .btn-finish {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-missing {
-  background-color: #e74c3c;
-  color: white;
-}
-
-.btn-missing:hover {
-  background-color: #c0392b;
-}
-
-.btn-finish {
-  background-color: #2ecc71;
-  color: white;
-}
-
-.btn-finish:hover {
-  background-color: #27ae60;
-}
-
-/* Prontuario.css */
-:root {
-  --background-primary: #ffffff;
-  --background-secondary: #f5f5f5;
-  --text-primary: #333;
-  --text-secondary: #2c3e50;
-  --border-color: #ecf0f1;
-  --input-bg: #ffffff;
-  --button-missing: #e74c3c;
-  --button-finish: #2ecc71;
-  --shadow-color: rgba(0, 0, 0, 0.281);
-}
-
-.dark-mode {
-  --background-primary: #1a1a1a;
-  --background-secondary: #2d2d2d;
-  --text-primary: #e0e0e0;
-  --text-secondary: #b0b0b0;
-  --border-color: #404040;
-  --input-bg: #2d2d2d;
-  --button-missing: #8b1a27;
-  --button-finish: #1a5a2a;
-  --shadow-color: rgba(0, 0, 0, 0.5);
-}
-
-.container-prontuario {
-  max-width: 1600px;
-  margin: 30px auto;
-  padding: 30px;
-  background-color: var(--background-primary);
-  border-radius: 12px;
-  box-shadow: 0 8px 16px var(--shadow-color);
-  font-family: 'Arial', sans-serif;
-  color: var(--text-primary);
-  transition: all 0.3s ease;
-}
-
-.container-prontuario h2 {
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.prontuario-top {
-  display: flex;
-  gap: 40px;
-  background-color: var(--background-secondary);
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.prontuario-col p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-primary);
-  margin: 12px 0;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.field-label {
-  font-weight: bold;
-  color: var(--text-secondary);
-}
-
-.prontuario-observacoes {
-  margin-top: 40px;
-  padding-top: 30px;
-  border-top: 2px solid var(--border-color);
-}
-
-.observacao-group label {
-  color: var(--text-secondary);
-}
-
-.observacao-input {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
-  background-color: var(--input-bg);
-  color: var(--text-primary);
-  transition: all 0.3s ease;
-}
-
-.observacao-input:focus {
-  border-color: var(--button-finish);
-  box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
-}
-
-.prontuario-actions {
-  border-top: 2px solid var(--border-color);
-}
-
-.btn-missing {
-  background-color: var(--button-missing);
-}
-
-.btn-finish {
-  background-color: var(--button-finish);
-}
-
-.btn-missing:hover {
-  background-color: var(--button-missing);
-  filter: brightness(0.9);
-}
-
-.btn-finish:hover {
-  background-color: var(--button-finish);
-  filter: brightness(0.9);
-}
-
-.dark-mode .prontuario-top img {
-  filter: brightness(0.8);
-}
-
-@media (max-width: 768px) {
-  .prontuario-top {
-    flex-direction: column;
-  }
-  
-  .prontuario-top img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 1/1;
-  }
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    resize: vertical;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .prontuario-actions {
-    flex-direction: column;
-  }
-  
-  .btn-missing, .btn-finish {
-    width: 100%;
-    text-align: center;
-  }
+.observacao-input.dark-mode {
+    background-color: #2c2c2c;
+    color: #fff;
+    border-color: #555;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .prontuario-top {
-    flex-direction: column;
-  }
-
-  .prontuario-info {
-    flex-direction: column;
+/* ações */
+.prontuario-actions {
+    display: flex;
+    justify-content: center;
     gap: 20px;
-  }
-
-  .prontuario-top img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1/1;
-  }
-
-  .field-label {
-    min-width: 130px;
-  }
-}
-/* No arquivo Prontuario.css ou no CSS global */
-footer {
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  margin-top: auto;
 }
 
-body, html {
-  overflow-x: hidden;
+.btn-missing,
+.btn-finish {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-missing {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-finish {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn-missing:hover {
+    background-color: #d32f2f;
+}
+
+.btn-finish:hover {
+    background-color: #388e3c;
+}
+
+.btn-missing.dark-mode {
+    background-color: #e57373;
+}
+
+.btn-finish.dark-mode {
+    background-color: #81c784;
 }

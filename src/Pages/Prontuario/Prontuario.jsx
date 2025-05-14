@@ -3,12 +3,14 @@ import './Prontuario.css';
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
+import { toast } from 'react-toastify';
 
 const Prontuario = () => {
   const { darkMode } = useTheme();
-  const { id } = useParams();  // Agendamento ID
+  const { id } = useParams(); // ID do agendamento
+  const navigate = useNavigate();
   const [usuario, setUsuario] = useState(null);
   const [prontuarioData, setProntuarioData] = useState({
     problemaRelatado: '',
@@ -23,29 +25,28 @@ const Prontuario = () => {
         const agendamento = response.data.AgendamentosUsuarios;
         setUsuario(agendamento.usuario);
         console.log("Dados do agendamento:", agendamento);
-
       })
       .catch(error => console.error("Erro ao buscar agendamento:", error));
   }, [id]);
 
-
   const handleFinalizarConsulta = async (e) => {
     e.preventDefault();
 
-    try {
-      if (!prontuarioData.problemaRelatado || !prontuarioData.recomendacaoMedico) {
-        return alert("Preencha todos os campos do prontuário!");
-      }
+    if (!prontuarioData.problemaRelatado || !prontuarioData.recomendacaoMedico) {
+      return toast.warn("Preencha todos os campos do prontuário!");
+    }
 
+    try {
       await axios.post(`${urlBase}/consulta/concluir`, {
         agendamento_id: id,
         ...prontuarioData
       });
-      alert("Consulta finalizada com sucesso!");
-      window.location.href = "/home";
+
+      toast.success("Consulta finalizada com sucesso!");
+      setTimeout(() => navigate('/home'), 2000); // redireciona após toast
     } catch (error) {
       console.error("Erro ao finalizar consulta:", error);
-      alert("Erro ao finalizar consulta.");
+      toast.error("Erro ao finalizar consulta.");
     }
   };
 
@@ -55,15 +56,14 @@ const Prontuario = () => {
         agendamento_id: id
       });
 
-      alert("Paciente não compareceu!");
-      window.location.href = "/home";
+      toast.info("Paciente não compareceu!");
+      setTimeout(() => navigate('/home'), 2000);
     } catch (error) {
       console.error("Erro ao marcar como não comparecido:", error);
-      alert("Erro ao processar.");
+      toast.error("Erro ao processar.");
     }
   };
 
-  // Associando os campos de texto ao estado
   const handleInputChange = (e) => {
     setProntuarioData({
       ...prontuarioData,
@@ -76,9 +76,8 @@ const Prontuario = () => {
   return (
     <>
       <Header />
-      <br /><br /><br />
       <div className={`container-prontuario ${darkMode ? 'dark-mode' : ''}`}>
-        <h2>Prontuário</h2>
+        <h2 className='titleProntuario'>Prontuário</h2>
 
         <div className="prontuario-top">
           <img
