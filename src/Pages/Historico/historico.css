@@ -22,164 +22,137 @@
   --button-hover: #216622;
 }
 
-.corpo-historico {
-  background-color: var(--background-primary);
-  color: var(--color-text);
-  margin-top: 82px;
-  padding: 20px;
-  min-height: 100vh;
-  transition: all 0.3s ease;
-}
-
-.titulo-principal {
-  font-family: var(--primary-font);
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.secao-historico {
-  margin-bottom: 40px;
-}
-
-.titulo-secao {
-  font-family: var(--second-font);
-  color: var(--color-text);
-  margin-bottom: 20px;
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 10px;
-}
-
-.lista-historico {
+/* Estrutura principal */
+.page-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  min-height: 100vh;
+  background-color: var(--background-primary);
 }
 
-.item-historico {
+.content-wrap {
+  flex: 1;
+  padding: 20px;
+  margin-top: 82px; /* Espaço para o header */
+  padding-top: 80px; /* Espaço extra para o título */
+
+}
+
+/* Container de consultas */
+.consultas-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+}
+
+.consultas-container h2 {
+  font-family: var(--primary-font);
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--color-text);
+}
+
+/* Grid de prontuários */
+.grid-prontuarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Alterado para 4 colunas */
+  gap: 20px;
+  padding: 20px 0;
+  margin: 0;
+}
+
+/* Cards de prontuário */
+.card-prontuario {
   background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-}
-
-.dark-mode .item-historico {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.692);
-}
-
-.info-paciente {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 15px;
+  flex-direction: column;
+  height: auto;
+  min-height: 320px;
+  overflow: hidden; /* Contém todo o conteúdo */
+  word-break: break-word; /* Quebra palavras longas */
+  text-overflow: ellipsis; /* Adiciona "..." se o texto for cortado */
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* Limita a 6 linhas (ajuste conforme necessário) */
+  -webkit-box-orient: vertical;
+  
+  
 }
 
-.foto-paciente {
-  width: 100px;
-  height: 100px;
+.card-prontuario:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .card-prontuario {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Elementos dentro do card */
+.imagem-genero {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 15px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.dark-img {
-  filter: brightness(0.8);
-}
-
-.dados-paciente {
-  flex: 1;
-}
-
-.dados-paciente h3 {
+.testoTeste {
+  margin: 8px 0;
   font-family: var(--second-font);
-  margin-bottom: 10px;
+  color: var(--color-text);
+  line-height: 1.4;
+  font-size: 0.95rem;
+  white-space: normal; /* Permite quebra de linha */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Limita a 2 linhas por parágrafo */
+  -webkit-box-orient: vertical;
+}
+
+.testoTeste strong {
+  font-weight: 600;
+}
+
+/* Mensagem quando não há consultas */
+.no-consultas-message {
+  text-align: center;
+  padding: 60px 20px;
+  font-family: var(--second-font);
+  font-size: 1.2rem;
   color: var(--color-text);
 }
 
-.dados-paciente p {
-  margin: 5px 0;
-  color: var(--color-text);
-  font-family: var(--second-font);
+.no-consultas-message p {
+  margin-bottom: 20px;
 }
 
+/* Botões (caso precise) */
 .botao-prontuario {
   display: inline-block;
   font-family: var(--second-font);
-  padding: 12px 25px;
+  padding: 10px 20px;
   background-color: var(--button-bg);
   color: white;
   border-radius: 8px;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  border: none;
-  cursor: pointer;
-  transform: translateY(0);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.botao-prontuario::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: all 0.5s;
+  transition: all 0.3s;
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 .botao-prontuario:hover {
   background-color: var(--button-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(12, 131, 51, 0.25);
-  animation: buttonShine 1.5s;
 }
 
-.botao-prontuario:hover::before {
-  left: 100%;
-}
-
-@keyframes buttonShine {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 100% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
-
-.dark-mode .botao-prontuario {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.dark-mode .botao-prontuario:hover {
-  box-shadow: 0 6px 12px rgba(45, 134, 47, 0.4);
-}
-
-.sem-registros {
-  text-align: center;
-  font-family: var(--second-font);
-  color: var(--color-text);
-  padding: 20px;
-}
-
-
-
-
-
-
-
-
-/* Animações AOS */
+/* Animações */
 [data-aos] {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
@@ -189,34 +162,54 @@
   transform: translate3d(0, 0, 0) !important;
 }
 
-.dark-mode [data-aos] {
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+/* Responsividade */
+@media (max-width: 768px) {
+  .grid-prontuarios {
+    grid-template-columns: 1fr;
+  }
+  
+  .content-wrap {
+    padding: 15px;
+    margin-top: 70px;
+  }
+  
+  .card-prontuario {
+    min-height: 280px;
+  }
 }
 
-.consultas-container {
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
+@media (max-width: 480px) {
+  .consultas-container {
+    padding: 10px;
+  }
+  
+  .testoTeste {
+    font-size: 0.9rem;
+  }
 
-.grid-prontuarios {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
-  margin-top: 16px;
+  
 }
+/* Adicione ou substitua estas regras no seu Historico.css */
 
 .card-prontuario {
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
+  /* Mantenha as propriedades básicas existentes */
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease-in-out;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
 }
 
+/* Animação de borda ao passar o mouse */
 .card-prontuario:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border: 1px solid var(--button-bg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Versão para dark mode */
+.dark-mode .card-prontuario:hover {
+  border: 1px solid var(--button-hover);
+  box-shadow: 0 4px 8px rgba(45, 134, 47, 0.2);
+}

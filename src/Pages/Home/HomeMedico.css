@@ -1,41 +1,119 @@
+/* Estilos base */
 .imgHome {
   margin-top: 150px;
   width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.agendamentos {
+.main-content {
+  min-height: calc(100vh - 120px);
+  padding: 20px;
+  position: relative;
+}
+
+/* Container do carrossel */
+.agendamentos-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 2rem;
-  background-color: #f9f9f9;
 }
 
-.agendamentos h2 {
+.titleHome {
+  text-align: center;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: #2c3e50;
 }
 
+/* Carrossel horizontal */
+.carrossel-agendamentos {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 50px;
+}
+
+.carrossel-agendamentos::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cards */
 .agendamento-card {
+  flex: 0 0 auto;
+  width: 280px;
   background-color: #fff;
   border-left: 5px solid #2ecc71;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 1.5rem;
   border-radius: 8px;
   padding: 1rem 1.5rem;
   transition: transform 0.2s ease;
+  scroll-snap-align: start;
 }
 
 .agendamento-card:hover {
   transform: scale(1.01);
 }
 
-.titleHome {
-  text-align: center;
+/* Navegação - Estilos atualizados */
+.navigation-buttons {
+  position: absolute;
+  top: 50%;
+  width: calc(100% + 40px);
+  left: -20px;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
 }
 
+.nav-btn {
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2ecc71;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nav-btn:hover {
+  background: #2ecc71;
+  color: white;
+  transform: scale(1.1);
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+.nav-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Conteúdo dos cards */
 .card-header {
   border-bottom: 1px solid #eee;
   margin-bottom: 0.5rem;
   padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .card-header h3 {
@@ -44,19 +122,12 @@
   color: #27ae60;
 }
 
-.card-header p {
-  margin: 0;
-  color: #888;
-  font-size: 0.9rem;
-}
-
 .card-header img {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  margin-right: 10px;
+  object-fit: cover;
 }
-
 
 .card-body p {
   margin: 0.4rem 0;
@@ -70,29 +141,11 @@
   color: #2ecc71;
 }
 
-.no-agendamentos {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: #666;
-  height: 25vh;
-}
-
-.no-agendamentos img {
-  width: 120px;
-  margin-bottom: 1rem;
-  opacity: 0.7;
-}
-
-.no-agendamentos h2 {
-  font-size: 1.5rem;
-  font-weight: normal;
-}
-
+/* Botão */
 .botao-prontuario {
   display: inline-block;
   padding: 10px 20px;
   background-color: #2ecc71;
-  /* verde suave */
   color: #fff;
   font-weight: 600;
   text-decoration: none;
@@ -102,10 +155,114 @@
   font-size: 16px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
 }
 
 .botao-prontuario:hover {
   background-color: #27ae60;
-  /* verde mais escuro */
   transform: translateY(-2px);
+}
+
+/* Mensagens */
+.no-agendamentos {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #666;
+  min-height: 25vh;
+}
+
+/* Modo escuro */
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .main-content {
+  background-color: #1e1e1e;
+}
+
+.dark-mode .titleHome {
+  color: #ffffff;
+}
+
+.dark-mode .agendamento-card {
+  background-color: #2d2d2d;
+  border-left: 5px solid #27ae60;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .card-header h3 {
+  color: #2ecc71;
+}
+
+.dark-mode .card-body p {
+  color: #e0e0e0;
+}
+
+.dark-mode .card-header {
+  border-bottom: 1px solid #444;
+}
+
+.dark-mode .no-agendamentos {
+  color: #aaa;
+}
+
+.dark-mode .no-agendamentos h2 {
+  color: #e0e0e0;
+}
+
+.dark-mode .nav-btn {
+  background: rgba(45, 45, 45, 0.9);
+  color: #2ecc71;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .nav-btn:hover {
+  background: #2ecc71;
+  color: white;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .carrossel-agendamentos {
+    margin: 0 30px;
+  }
+  
+  .agendamento-card {
+    width: 260px;
+  }
+  
+  .nav-btn {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .nav-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carrossel-agendamentos {
+    margin: 0 20px;
+  }
+  
+  .agendamento-card {
+    width: 240px;
+  }
+  
+  .imgHome {
+    margin-top: 100px;
+  }
+  
+  .nav-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .navigation-buttons {
+    width: calc(100% + 30px);
+    left: -15px;
+  }
 }

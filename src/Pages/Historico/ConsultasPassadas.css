@@ -35,12 +35,22 @@
 }
 
 .card-prontuario {
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 16px;
+  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 320px;
+  overflow: hidden; /* Contém todo o conteúdo */
+  word-break: break-word; /* Quebra palavras longas */
+  text-overflow: ellipsis; /* Adiciona "..." se o texto for cortado */
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* Limita a 6 linhas (ajuste conforme necessário) */
+  -webkit-box-orient: vertical;
 }
 
 .card-prontuario:hover {
