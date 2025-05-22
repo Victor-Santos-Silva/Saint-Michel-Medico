@@ -13,7 +13,7 @@ export default function Header() {
       <Link to="/home" className="logoHeader">
         <img 
           className="imgHeader" 
-          src="../src/Img/logoHeader.png" 
+          src="../img/logoHeader.png" 
           alt="Hospital Saint-Michel" 
         />
       </Link>
