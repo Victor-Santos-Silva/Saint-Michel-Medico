@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Historico.css';
+import './historico.css';
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import axios from 'axios';
