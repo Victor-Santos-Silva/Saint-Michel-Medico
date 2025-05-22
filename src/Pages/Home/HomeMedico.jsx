@@ -108,8 +108,9 @@ export default function HomeMedico() {
   return (
     <div className={darkMode ? 'dark-mode' : 'light-mode'}>
       <Header />
-      <main className="main-content">
         <img src={LogoVerde} alt="Logo Verde" className='imgHome' />
+
+      <main className="main-content">
 
         {/* paciente */}
         {dataUsuarios.length > 0 ? (
