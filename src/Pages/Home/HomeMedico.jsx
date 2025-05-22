@@ -151,7 +151,7 @@ export default function HomeMedico() {
         {/* dependente */}
         {dataDocentes.length > 0 ? (
           <div className="agendamentos-container">
-            <h2 className='titleHome'>Agendamentos</h2>
+            <h2 className='titleHome'>Agendamentos de Dependentes</h2>
             <div className="navigation-buttons">
               <button className="nav-btn" onClick={scrollLeft} aria-label="Voltar">&lt;</button>
               <button className="nav-btn" onClick={scrollRight} aria-label="Avançar">&gt;</button>

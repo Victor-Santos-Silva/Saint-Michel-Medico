@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import '../Prontuario.css';
-import Header from '../../../Components/Header/Header';
-import Footer from '../../../Components/Footer/Footer';
+import './ProntuarioDocente.css';
+import Header from '../../Components/Header/Header';
+import Footer from '../../Components/Footer/Footer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useTheme } from '../../../context/ThemeContext';
+import { useTheme } from '../../context/ThemeContext';
 
 const Prontuario = () => {
-  const { darkMode } = useTheme();
-  const { id } = useParams();  // Agendamento ID
+  const { isDarkMode: darkMode, toggleTheme } = useTheme();
+  const { id } = useParams();
   const [usuario, setUsuario] = useState(null);
   const [prontuarioData, setProntuarioData] = useState({
     problemaRelatado: '',
@@ -21,12 +21,11 @@ const Prontuario = () => {
     axios.get(`${urlBase}/agendamentoDocente/${id}`)
       .then(response => {
         const agendamento = response.data.AgendamentosDocentes;
-        setUsuario(agendamento); // Aqui!
+        setUsuario(agendamento);
         console.log("Dados do agendamento:", agendamento);
       })
       .catch(error => console.error("Erro ao buscar agendamento:", error));
   }, [id]);
-
 
   const handleFinalizarConsulta = async (e) => {
     e.preventDefault();
@@ -62,7 +61,6 @@ const Prontuario = () => {
     }
   };
 
-  // Associando os campos de texto ao estado
   const handleInputChange = (e) => {
     setProntuarioData({
       ...prontuarioData,
@@ -70,14 +68,17 @@ const Prontuario = () => {
     });
   };
 
-  if (!usuario) return <p>Carregando...</p>;
+  if (!usuario) return <p className={darkMode ? 'dark-text' : ''}>Carregando...</p>;
 
   return (
     <>
       <Header />
       <br /><br /><br />
       <div className={`container-prontuario ${darkMode ? 'dark-mode' : ''}`}>
-        <h2>Prontuário</h2>
+        <div className="theme-toggle-container">
+        </div>
+
+        <h2 className={`titleProntuario ${darkMode ? 'dark-mode' : ''}`}>Prontuário</h2>
 
         <div className="prontuario-top">
           <img
@@ -88,29 +89,29 @@ const Prontuario = () => {
 
           <div className="prontuario-info">
             <div className="prontuario-col">
-              <p><span className="field-label">Nome Completo:</span> {usuario.nomeCompleto}</p>
-              <p><span className="field-label">Data de Nascimento:</span> {usuario.dataDeNascimento}</p>
-              <p><span className="field-label">RG:</span> {usuario.rg}</p>
-              <p><span className="field-label">CPF:</span> {usuario.cpf}</p>
-              <p><span className="field-label">Endereço:</span> {usuario.endereco}</p>
-              <p><span className="field-label">Telefone:</span> {usuario.telefone}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>Nome Completo:</span> {usuario.nomeCompleto}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>Data de Nascimento:</span> {usuario.dataDeNascimento}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>RG:</span> {usuario.rg}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>CPF:</span> {usuario.cpf}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>Endereço:</span> {usuario.endereco}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>Telefone:</span> {usuario.telefone}</p>
             </div>
 
             <div className="prontuario-col">
-              <p><span className="field-label">Email:</span> {usuario.email}</p>
-              <p><span className="field-label">Gênero:</span> {usuario.genero}</p>
-              <p><span className="field-label">Convênio:</span> {usuario.convenioMedico}</p>
-              <p><span className="field-label">Plano do Convênio:</span> {usuario.planoConvenio}</p>
-              <p><span className="field-label">Tipo Sanguíneo:</span> {usuario.tipoSanguineo}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>Email:</span> {usuario.email}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>Gênero:</span> {usuario.genero}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>Convênio:</span> {usuario.convenioMedico}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>Plano do Convênio:</span> {usuario.planoConvenio}</p>
+              <p className={darkMode ? 'dark-text' : ''}><span className={`field-label ${darkMode ? 'dark-text' : ''}`}>Tipo Sanguíneo:</span> {usuario.tipoSanguineo}</p>
             </div>
           </div>
         </div>
 
         <div className="prontuario-observacoes">
           <div className="observacao-group">
-            <label>Problema relatado:</label>
+            <label className={darkMode ? 'dark-text' : ''}>Problema relatado:</label>
             <textarea
-              className={`observacao-input ${darkMode ? 'dark-mode' : ''}`}
+              className={`observacao-input ${darkMode ? 'dark-textarea' : ''}`}
               rows="4"
               name="problemaRelatado"
               value={prontuarioData.problemaRelatado}
@@ -120,9 +121,9 @@ const Prontuario = () => {
           </div>
 
           <div className="observacao-group">
-            <label>Recomendação Médica:</label>
+            <label className={darkMode ? 'dark-text' : ''}>Recomendação Médica:</label>
             <textarea
-              className={`observacao-input ${darkMode ? 'dark-mode' : ''}`}
+              className={`observacao-input ${darkMode ? 'dark-textarea' : ''}`}
               rows="4"
               name="recomendacaoMedico"
               value={prontuarioData.recomendacaoMedico}
@@ -133,10 +134,16 @@ const Prontuario = () => {
         </div>
 
         <div className="prontuario-actions">
-          <button className={`btn-missing ${darkMode ? 'dark-mode' : ''}`} onClick={handleNaoCompareceu}>
+          <button 
+            className={`btn-missing ${darkMode ? 'dark-btn' : ''}`} 
+            onClick={handleNaoCompareceu}
+          >
             Paciente não compareceu
           </button>
-          <button className={`btn-finish ${darkMode ? 'dark-mode' : ''}`} onClick={handleFinalizarConsulta}>
+          <button 
+            className={`btn-finish ${darkMode ? 'dark-btn' : ''}`} 
+            onClick={handleFinalizarConsulta}
+          >
             Finalizar Consulta
           </button>
         </div>

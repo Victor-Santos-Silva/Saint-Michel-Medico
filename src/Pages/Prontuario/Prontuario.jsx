@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Prontuario.css';
+import './Prontuario.css'
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import axios from 'axios';
@@ -8,8 +8,8 @@ import { useTheme } from '../../context/ThemeContext';
 import { toast } from 'react-toastify';
 
 const Prontuario = () => {
-  const { darkMode } = useTheme();
-  const { id } = useParams(); // ID do agendamento
+  const { isDarkMode, toggleTheme } = useTheme();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState(null);
   const [prontuarioData, setProntuarioData] = useState({
@@ -24,7 +24,6 @@ const Prontuario = () => {
       .then(response => {
         const agendamento = response.data.AgendamentosUsuarios;
         setUsuario(agendamento.usuario);
-        console.log("Dados do agendamento:", agendamento);
       })
       .catch(error => console.error("Erro ao buscar agendamento:", error));
   }, [id]);
@@ -43,7 +42,7 @@ const Prontuario = () => {
       });
 
       toast.success("Consulta finalizada com sucesso!");
-      setTimeout(() => navigate('/home'), 2000); // redireciona após toast
+      setTimeout(() => navigate('/home'), 2000);
     } catch (error) {
       console.error("Erro ao finalizar consulta:", error);
       toast.error("Erro ao finalizar consulta.");
@@ -71,46 +70,60 @@ const Prontuario = () => {
     });
   };
 
-  if (!usuario) return <p>Carregando...</p>;
+  if (!usuario) return <div className={`loading ${isDarkMode ? 'dark-mode' : ''}`}>Carregando...</div>;
 
   return (
-    <>
+    <div className={`theme-root ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <Header />
-      <div className={`container-prontuario ${darkMode ? 'dark-mode' : ''}`}>
-        <h2 className='titleProntuario'>Prontuário</h2>
+      <div className={`container-prontuario ${isDarkMode ? 'dark-mode' : ''}`}>
+        <h2 className={`titleProntuario ${isDarkMode ? 'dark-mode' : ''}`}>Prontuário</h2>
 
         <div className="prontuario-top">
           <img
-            src={usuario.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
+            src={usuario.imagemGenero || (isDarkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
             alt="Imagem do Paciente"
-            className={darkMode ? 'dark-img' : ''}
+            className={isDarkMode ? 'dark-img' : ''}
           />
 
           <div className="prontuario-info">
             <div className="prontuario-col">
-              <p><span className="field-label">Nome Completo:</span> {usuario.nomeCompleto}</p>
-              <p><span className="field-label">Data de Nascimento:</span> {usuario.dataDeNascimento}</p>
-              <p><span className="field-label">RG:</span> {usuario.rg}</p>
-              <p><span className="field-label">CPF:</span> {usuario.cpf}</p>
-              <p><span className="field-label">Endereço:</span> {usuario.endereco}</p>
-              <p><span className="field-label">Telefone:</span> {usuario.telefone}</p>
+              {[
+                { label: 'Nome Completo:', value: usuario.nomeCompleto },
+                { label: 'Data de Nascimento:', value: usuario.dataDeNascimento },
+                { label: 'RG:', value: usuario.rg },
+                { label: 'CPF:', value: usuario.cpf },
+                { label: 'Endereço:', value: usuario.endereco },
+                { label: 'Telefone:', value: usuario.telefone }
+              ].map((item, index) => (
+                <p key={index}>
+                  <span className={`field-label ${isDarkMode ? 'dark-mode' : ''}`}>{item.label}</span>
+                  <span className={`field-value ${isDarkMode ? 'dark-mode' : ''}`}>{item.value}</span>
+                </p>
+              ))}
             </div>
 
             <div className="prontuario-col">
-              <p><span className="field-label">Email:</span> {usuario.email}</p>
-              <p><span className="field-label">Gênero:</span> {usuario.genero}</p>
-              <p><span className="field-label">Convênio:</span> {usuario.convenioMedico}</p>
-              <p><span className="field-label">Plano do Convênio:</span> {usuario.planoConvenio}</p>
-              <p><span className="field-label">Tipo Sanguíneo:</span> {usuario.tipoSanguineo}</p>
+              {[
+                { label: 'Email:', value: usuario.email },
+                { label: 'Gênero:', value: usuario.genero },
+                { label: 'Convênio:', value: usuario.convenioMedico },
+                { label: 'Plano do Convênio:', value: usuario.planoConvenio },
+                { label: 'Tipo Sanguíneo:', value: usuario.tipoSanguineo }
+              ].map((item, index) => (
+                <p key={index}>
+                  <span className={`field-label ${isDarkMode ? 'dark-mode' : ''}`}>{item.label}</span>
+                  <span className={`field-value ${isDarkMode ? 'dark-mode' : ''}`}>{item.value}</span>
+                </p>
+              ))}
             </div>
           </div>
         </div>
 
         <div className="prontuario-observacoes">
           <div className="observacao-group">
-            <label>Problema relatado:</label>
+            <label className={`observacao-label ${isDarkMode ? 'dark-mode' : ''}`}>Problema relatado:</label>
             <textarea
-              className={`observacao-input ${darkMode ? 'dark-mode' : ''}`}
+              className={`observacao-input ${isDarkMode ? 'dark-mode' : ''}`}
               rows="4"
               name="problemaRelatado"
               value={prontuarioData.problemaRelatado}
@@ -120,9 +133,9 @@ const Prontuario = () => {
           </div>
 
           <div className="observacao-group">
-            <label>Recomendação Médica:</label>
+            <label className={`observacao-label ${isDarkMode ? 'dark-mode' : ''}`}>Recomendação Médica:</label>
             <textarea
-              className={`observacao-input ${darkMode ? 'dark-mode' : ''}`}
+              className={`observacao-input ${isDarkMode ? 'dark-mode' : ''}`}
               rows="4"
               name="recomendacaoMedico"
               value={prontuarioData.recomendacaoMedico}
@@ -133,16 +146,16 @@ const Prontuario = () => {
         </div>
 
         <div className="prontuario-actions">
-          <button className={`btn-missing ${darkMode ? 'dark-mode' : ''}`} onClick={handleNaoCompareceu}>
+          <button className={`btn-missing ${isDarkMode ? 'dark-mode' : ''}`} onClick={handleNaoCompareceu}>
             Paciente não compareceu
           </button>
-          <button className={`btn-finish ${darkMode ? 'dark-mode' : ''}`} onClick={handleFinalizarConsulta}>
+          <button className={`btn-finish ${isDarkMode ? 'dark-mode' : ''}`} onClick={handleFinalizarConsulta}>
             Finalizar Consulta
           </button>
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -51,9 +51,6 @@ export default function Historico() {
           {prontuarios.length === 0 && prontuarioParente.length === 0 ? (
             <div className="no-consultas-message">
               <p>Nenhuma consulta registrada.</p>
-              <Link to="/agendamento" className="botao-prontuario">
-                Agendar Nova Consulta
-              </Link>
             </div>
           ) : (
             <>

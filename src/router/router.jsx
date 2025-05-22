@@ -4,7 +4,7 @@ import HomeMedico from "../Pages/Home/HomeMedico";
 import Login from "../Pages/Login/Login";
 import Prontuario from "../Pages/Prontuario/Prontuario";
 import Historico from "../Pages/Historico/Historico";
-import ProntuarioDocente from "../Pages/Prontuario/ProntuarioDocente/ProntuarioDocente";
+import ProntuarioDocente from "../Pages/ProntuarioDocente/ProntuarioDocente";
 import PerfilMedico from "../Pages/PerfilMédico/perfilMedico";
 import Layout from "../Components/Layout/Layout"; // <-- aqui
 
