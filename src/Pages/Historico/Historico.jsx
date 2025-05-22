@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import './historico.css';
 
 export default function Historico() {
   const [prontuarios, setProntuarios] = useState([]);
@@ -56,8 +57,8 @@ export default function Historico() {
               {prontuarios.length > 0 && (
                 <div className="grid-prontuarios">
                   {prontuarios.map((item) => (
-                    <div 
-                      className="card-prontuario" 
+                    <div
+                      className="card-prontuario"
                       key={`u-${item.id}`}
                       data-aos="fade-up"
                     >
@@ -79,7 +80,7 @@ export default function Historico() {
                       <p className='testoTeste'>
                         <strong>Data:</strong> {item.Prontuario?.createdAt ? new Date(item.Prontuario.createdAt).toLocaleDateString() : "Não informada"}
                       </p>
-                     
+
                     </div>
                   ))}
                 </div>
@@ -88,8 +89,8 @@ export default function Historico() {
               {prontuarioParente.length > 0 && (
                 <div className="grid-prontuarios">
                   {prontuarioParente.map((item) => (
-                    <div 
-                      className="card-prontuario" 
+                    <div
+                      className="card-prontuario"
                       key={`p-${item.id}`}
                       data-aos="fade-up"
                     >
@@ -113,7 +114,7 @@ export default function Historico() {
                           ? new Date(item.ProntuarioDocente.createdAt).toLocaleDateString()
                           : "Não informada"}
                       </p>
-                      
+
                     </div>
                   ))}
                 </div>
