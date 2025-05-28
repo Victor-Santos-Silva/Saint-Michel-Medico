@@ -33,16 +33,6 @@ export default function Historico() {
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/consultaDocente/historico-parente")
-      .then(response => {
-        setProntuarioParente(response.data);
-      })
-      .catch(error => {
-        console.error("Erro ao buscar consultas passadas de usuários:", error);
-      });
-  }, []);
-
-  useEffect(() => {
     axios.get("http://localhost:5000/consultaDependente/historico")
       .then(response => {
         setprontuarioDependente(response.data);
@@ -51,6 +41,17 @@ export default function Historico() {
         console.error("Erro ao buscar consultas passadas de usuários:", error);
       });
   }, []);
+  /*   useEffect(() => {
+      axios.get("http://localhost:5000/consultaDocente/historico-parente")
+        .then(response => {
+          setProntuarioParente(response.data);
+        })
+        .catch(error => {
+          console.error("Erro ao buscar consultas passadas de usuários:", error);
+        });
+    }, []); */
+
+
 
   return (
     <div className={`page-container ${theme === 'dark' ? 'dark-mode' : ''}`}>
@@ -65,6 +66,38 @@ export default function Historico() {
             </div>
           ) : (
             <>
+              {prontuarios.length > 0 && (
+                <div className="grid-prontuarios">
+                  {prontuarios.map((item) => (
+                    <div
+                      className="card-prontuario"
+                      key={`u-${item.id}`}
+                      data-aos="fade-up"
+                    >
+                      <img
+                        src={item.usuario.imagemGenero}
+                        alt={`Foto de ${item.usuario.nomeCompleto}`}
+                        className="imagem-genero"
+                      />
+                      <p className='testoTeste'><strong>Paciente:</strong> {item.usuario.nomeCompleto}</p>
+                      <p className='testoTeste'>
+                        <strong>Problema:</strong> {item.Prontuario?.problemaRelatado || "Não informado"}
+                      </p>
+                      <p className='testoTeste'>
+                        <strong>Recomendação:</strong> {item.Prontuario?.recomendacaoMedico || "Não informada"}
+                      </p>
+                      <p className='testoTeste'>
+                        <strong>Status:</strong> {item.status || "Não informada"}
+                      </p>
+                      <p className='testoTeste'>
+                        <strong>Data:</strong> {item.Prontuario?.createdAt ? new Date(item.Prontuario.createdAt).toLocaleDateString() : item.data.split('-').reverse().join('/')}
+                      </p>
+
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {prontuarioDependente.length > 0 && (
                 <div className="grid-prontuarios">
                   {prontuarioDependente.map((item) => (
@@ -91,7 +124,7 @@ export default function Historico() {
                       <p className='testoTeste'>
                         <strong>Data:</strong> {item.ProntuarioDependente?.createdAt
                           ? new Date(item.ProntuarioDependente.createdAt).toLocaleDateString()
-                          : "Não informada"}
+                          : item.data.split('-').reverse().join('/')}
                       </p>
 
                     </div>
@@ -99,39 +132,7 @@ export default function Historico() {
                 </div>
               )}
 
-              {prontuarios.length > 0 && (
-                <div className="grid-prontuarios">
-                  {prontuarios.map((item) => (
-                    <div
-                      className="card-prontuario"
-                      key={`u-${item.id}`}
-                      data-aos="fade-up"
-                    >
-                      <img
-                        src={item.usuario.imagemGenero}
-                        alt={`Foto de ${item.usuario.nomeCompleto}`}
-                        className="imagem-genero"
-                      />
-                      <p className='testoTeste'><strong>Paciente:</strong> {item.usuario.nomeCompleto}</p>
-                      <p className='testoTeste'>
-                        <strong>Problema:</strong> {item.Prontuario?.problemaRelatado || "Não informado"}
-                      </p>
-                      <p className='testoTeste'>
-                        <strong>Recomendação:</strong> {item.Prontuario?.recomendacaoMedico || "Não informada"}
-                      </p>
-                      <p className='testoTeste'>
-                        <strong>Status:</strong> {item.status || "Não informada"}
-                      </p>
-                      <p className='testoTeste'>
-                        <strong>Data:</strong> {item.Prontuario?.createdAt ? new Date(item.Prontuario.createdAt).toLocaleDateString() : "Não informada"}
-                      </p>
-
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {prontuarioParente.length > 0 && (
+              {/*  {prontuarioParente.length > 0 && (
                 <div className="grid-prontuarios">
                   {prontuarioParente.map((item) => (
                     <div
@@ -163,7 +164,7 @@ export default function Historico() {
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
 
 
             </>
