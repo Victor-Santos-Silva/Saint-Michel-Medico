@@ -255,7 +255,7 @@ export default function HomeMedico() {
                     <h3>{dependente.nomeCompleto}</h3>
                   </div>
                   <div className="card-body">
-                    <p><FiCalendar /> Data: {new Date(dependente.data).toLocaleDateString('pt-BR')}</p>
+                    <p><FiCalendar /> Data: {dependente.data.split('-').reverse().join('/')}</p>
                     <p><FiClock /> Horário: {dependente.hora}</p>
                     <p><RiFileList2Fill /> Status: {dependente.status}</p>
                   </div>
