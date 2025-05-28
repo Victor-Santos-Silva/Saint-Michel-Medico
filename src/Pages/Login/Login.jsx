@@ -135,7 +135,7 @@ export default function Login() {
 
                     <form onSubmit={handleSubmit} className='formularioLogin'>
                         <div className="form-group">
-                            <label htmlFor="crm">CRM:</label>
+                            <label htmlFor="crm" className='inputLogin'>CRM:</label>
                             <input
                                 type="text"
                                 name="crm"
@@ -149,7 +149,7 @@ export default function Login() {
                         </div>
                         
                         <div className="form-group">
-                            <label htmlFor="senha">SENHA:</label>
+                            <label htmlFor="senha" className='inputLogin'>SENHA:</label>
                             <input
                                 type="password"
                                 name="senha_corporativa"

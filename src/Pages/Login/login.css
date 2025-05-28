@@ -6,7 +6,7 @@
   --primary-color: #27ae60;
   --primary-dark: #219653;
   --primary-light: #6fcf97;
-  --accent-color: #2d9cdb;
+  --accent-color: #6fcf97;
   --text-dark: #333333;
   --text-light: #f2f2f2;
   --bg-light: #ffffff;
@@ -92,7 +92,7 @@ body {
 }
 
 .login-subtitle {
-  color: #666;
+  color: #dfdfdf;
   font-size: 0.95rem;
 }
 
@@ -112,8 +112,56 @@ body {
 
 .form-group label {
   font-weight: 500;
-  color: var(--text-light);
+  color: black;
   font-size: 0.95rem;
+}
+.form-group .inputLogin {
+  font-weight: 500;
+  color: white;
+  font-size: 0.95rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.input-error {
+  border-color: #e53935;
+  background-color: #fff5f5;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: 14px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.error-icon {
+  background-color: #e53935;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  font-size: 12px;
 }
 
 .form-control {
@@ -214,7 +262,7 @@ body {
   text-align: center;
   margin-top: 2rem;
   font-size: 0.85rem;
-  color: #666;
+  color: #dfdfdf;
 }
 
 /* Modal de esqueci senha */
