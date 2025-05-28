@@ -11,6 +11,7 @@ import './historico.css';
 export default function Historico() {
   const [prontuarios, setProntuarios] = useState([]);
   const [prontuarioParente, setProntuarioParente] = useState([]);
+  const [prontuarioDependente, setprontuarioDependente] = useState([]);
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -41,6 +42,16 @@ export default function Historico() {
       });
   }, []);
 
+  useEffect(() => {
+    axios.get("http://localhost:5000/consultaDependente/historico")
+      .then(response => {
+        setprontuarioDependente(response.data);
+      })
+      .catch(error => {
+        console.error("Erro ao buscar consultas passadas de usuários:", error);
+      });
+  }, []);
+
   return (
     <div className={`page-container ${theme === 'dark' ? 'dark-mode' : ''}`}>
       <Header />
@@ -48,12 +59,46 @@ export default function Historico() {
         <div className="consultas-container" data-aos="fade-up">
           <h2>Consultas Passadas</h2>
 
-          {prontuarios.length === 0 && prontuarioParente.length === 0 ? (
+          {prontuarios.length === 0 && prontuarioParente.length === 0 && prontuarioDependente.length === 0 ? (
             <div className="no-consultas-message">
               <p>Nenhuma consulta registrada.</p>
             </div>
           ) : (
             <>
+              {prontuarioDependente.length > 0 && (
+                <div className="grid-prontuarios">
+                  {prontuarioDependente.map((item) => (
+                    <div
+                      className="card-prontuario"
+                      key={`p-${item.id}`}
+                      data-aos="fade-up"
+                    >
+                      <img
+                        src={item.Dependente.imagemGenero}
+                        alt={`Foto de ${item.Dependente.nomeCompleto}`}
+                        className="imagem-genero"
+                      />
+                      <p className='testoTeste'><strong>Paciente:</strong> {item.Dependente.nomeCompleto}</p>
+                      <p className='testoTeste'>
+                        <strong>Problema:</strong> {item.ProntuarioDependente?.problemaRelatado || "Não informado"}
+                      </p>
+                      <p className='testoTeste'>
+                        <strong>Recomendação:</strong> {item.ProntuarioDependente?.recomendacaoMedico || "Não informada"}
+                      </p>
+                      <p className='testoTeste'>
+                        <strong>Status:</strong> {item.status || "Não informada"}
+                      </p>
+                      <p className='testoTeste'>
+                        <strong>Data:</strong> {item.ProntuarioDependente?.createdAt
+                          ? new Date(item.ProntuarioDependente.createdAt).toLocaleDateString()
+                          : "Não informada"}
+                      </p>
+
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {prontuarios.length > 0 && (
                 <div className="grid-prontuarios">
                   {prontuarios.map((item) => (
@@ -119,6 +164,8 @@ export default function Historico() {
                   ))}
                 </div>
               )}
+
+
             </>
           )}
         </div>

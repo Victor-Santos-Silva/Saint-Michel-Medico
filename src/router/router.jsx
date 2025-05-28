@@ -7,7 +7,7 @@ import Historico from "../Pages/Historico/Historico";
 import ProntuarioDocente from "../Pages/ProntuarioDocente/ProntuarioDocente";
 import PerfilMedico from "../Pages/PerfilMédico/perfilMedico";
 import Layout from "../Components/Layout/Layout"; // <-- aqui
-
+import ProntuarioDependente from "../Pages/ProntuarioDependente/ProntuarioDependente";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
       { path: "home", element: <HomeMedico /> },
       { path: "prontuario/:id", element: <Prontuario /> },
       { path: "prontuarioDocente/:id", element: <ProntuarioDocente /> },
+      { path: "prontuarioDependente/:id", element: <ProntuarioDependente /> },
       { path: "historico", element: <Historico /> },
       { path: "perfil", element: <PerfilMedico /> },
     ],
