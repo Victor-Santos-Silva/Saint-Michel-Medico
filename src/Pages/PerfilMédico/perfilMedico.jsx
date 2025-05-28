@@ -80,11 +80,6 @@ export default function PerfilMedico() {
                             <span className='info-label'>CPF:</span>
                             <span className='info-value'>{formatarCPF(medicoData.cpf)}</span>
                         </div>
-                        
-                        <div className='info-item'>
-                            <span className='info-label'>Nacionalidade:</span>
-                            <span className='info-value'>{medicoData.nacionalidade || 'Não informada'}</span>
-                        </div>
                     </div>
 
                     <div className='info-section'>
