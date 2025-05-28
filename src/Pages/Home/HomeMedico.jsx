@@ -42,9 +42,18 @@ export default function HomeMedico() {
     }
   };
 
+  const parseLocalDate = (dateString) => {
+    return new Date(dateString + 'T12:00:00');
+  };
+
   useEffect(() => {
     const fetchAgendamentos = async () => {
       try {
+        const isSameLocalDate = (d1, d2) =>
+          d1.getFullYear() === d2.getFullYear() &&
+          d1.getMonth() === d2.getMonth() &&
+          d1.getDate() === d2.getDate();
+
         const hoje = new Date();
         hoje.setHours(0, 0, 0, 0);
 
@@ -53,14 +62,14 @@ export default function HomeMedico() {
         if (Array.isArray(response.data)) {
           const agendamentosFiltrados = response.data.filter(a => {
             if (!a.data) return false;
-            const dataAgendamento = new Date(a.data);
-            dataAgendamento.setHours(0, 0, 0, 0);
+            const dataAgendamento = parseLocalDate(a.data); // << aqui usamos a nova função
             return (
               a.status !== 'finalizado' &&
               a.status !== 'nao_compareceu' &&
-              dataAgendamento >= hoje
+              isSameLocalDate(dataAgendamento, hoje)
             );
           });
+
           setDataUsuarios(agendamentosFiltrados);
         }
       } catch (error) {
@@ -71,6 +80,8 @@ export default function HomeMedico() {
     fetchAgendamentos();
   }, [medicoLogadoId]);
 
+
+
   useEffect(() => {
     const fetchAgendamentos = async () => {
       try {
@@ -79,7 +90,7 @@ export default function HomeMedico() {
 
         const response = await axios.get(`http://localhost:5000/agendarDependente/agendamentoGeralDependente?medico_id=${medicoLogadoId}`);
         console.log(response.data);
-        
+
         const agendamentos = Array.isArray(response.data)
           ? response.data
           : (Array.isArray(response.data)
@@ -115,7 +126,7 @@ export default function HomeMedico() {
 
         const response = await axios.get(`http://localhost:5000/agendarDependente/agendamentoGeralDependente?medico_id=${medicoLogadoId}`);
         console.log(response.data.agendamentoDependente);
-        
+
         const agendamentos = Array.isArray(response.data.agendamentoDependente)
           ? response.data.agendamentoDependente
           : (Array.isArray(response.data.agendamentoDependente)
@@ -145,7 +156,7 @@ export default function HomeMedico() {
   return (
     <div className={darkMode ? 'dark-mode' : 'light-mode'}>
       <Header />
-        <img src={LogoVerde} alt="Logo Verde" className='imgHome' />
+      <img src={LogoVerde} alt="Logo Verde" className='imgHome' />
 
       <main className="main-content">
 
@@ -169,7 +180,7 @@ export default function HomeMedico() {
                     <h3>{usuario.usuario.nomeCompleto}</h3>
                   </div>
                   <div className="card-body">
-                    <p><FiCalendar /> Data: {new Date(usuario.data).toLocaleDateString('pt-BR')}</p>
+                    <p><FiCalendar /> Data: {usuario.data.split('-').reverse().join('/')}</p>
                     <p><FiClock /> Horário: {usuario.hora}</p>
                     <p><RiFileList2Fill /> Status: {usuario.status}</p>
                   </div>
