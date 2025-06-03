@@ -14,7 +14,6 @@ import LogoVerde from '../../Img/LogoVerde.png';
 
 export default function HomeMedico() {
   const [dataUsuarios, setDataUsuarios] = useState([]);
-  const [dataDocentes, setDataDocentes] = useState([]);
   const [dataDependentes, setDataDependentes] = useState([]);
   const { id } = useAuth();
   const { isDarkMode: darkMode } = useTheme();
@@ -80,35 +79,34 @@ export default function HomeMedico() {
     fetchAgendamentos();
   }, [medicoLogadoId]);
 
-
-
+  // Fetch dependentes agendamentos
   useEffect(() => {
     const fetchAgendamentos = async () => {
       try {
+        const isSameLocalDate = (d1, d2) =>
+          d1.getFullYear() === d2.getFullYear() &&
+          d1.getMonth() === d2.getMonth() &&
+          d1.getDate() === d2.getDate();
+
         const hoje = new Date();
         hoje.setHours(0, 0, 0, 0);
 
         const response = await axios.get(`http://localhost:5000/agendarDependente/agendamentoGeralDependente?medico_id=${medicoLogadoId}`);
-        console.log(response.data);
+        console.log("Dependente", response.data.agendamentoDependente);
 
-        const agendamentos = Array.isArray(response.data)
-          ? response.data
-          : (Array.isArray(response.data)
-            ? response.data
-            : []);
+        if (Array.isArray(response.data.agendamentoDependente)) {
+          const agendamentosFiltrados = response.data.agendamentoDependente.filter(a => {
+            if (!a.data) return false;
+            const dataAgendamento = parseLocalDate(a.data);
+            return (
+              a.status !== 'finalizado' &&
+              a.status !== 'nao_compareceu' &&
+              isSameLocalDate(dataAgendamento, hoje)
+            );
+          });
 
-        const agendamentosFiltrados = agendamentos.filter(a => {
-          if (!a.data) return false;
-          const dataAgendamento = new Date(a.data);
-          dataAgendamento.setHours(0, 0, 0, 0);
-          return (
-            a.status !== 'finalizado' &&
-            a.status !== 'nao_compareceu' &&
-            dataAgendamento >= hoje
-          );
-        });
-
-        setDataDocentes(agendamentosFiltrados);
+          setDataDependentes(agendamentosFiltrados);
+        }
       } catch (error) {
         console.error("Erro ao buscar agendamentos:", error);
       }
@@ -117,41 +115,6 @@ export default function HomeMedico() {
     fetchAgendamentos();
   }, [medicoLogadoId]);
 
-
-  useEffect(() => {
-    const fetchAgendamentos = async () => {
-      try {
-        const hoje = new Date();
-        hoje.setHours(0, 0, 0, 0);
-
-        const response = await axios.get(`http://localhost:5000/agendarDependente/agendamentoGeralDependente?medico_id=${medicoLogadoId}`);
-        console.log(response.data.agendamentoDependente);
-
-        const agendamentos = Array.isArray(response.data.agendamentoDependente)
-          ? response.data.agendamentoDependente
-          : (Array.isArray(response.data.agendamentoDependente)
-            ? response.data.agendamentoDependente
-            : []);
-
-        const agendamentosFiltrados = agendamentos.filter(a => {
-          if (!a.data) return false;
-          const dataAgendamento = new Date(a.data);
-          dataAgendamento.setHours(0, 0, 0, 0);
-          return (
-            a.status !== 'finalizado' &&
-            a.status !== 'nao_compareceu' &&
-            dataAgendamento >= hoje
-          );
-        });
-
-        setDataDependentes(agendamentosFiltrados);
-      } catch (error) {
-        console.error("Erro ao buscar agendamentos:", error);
-      }
-    };
-
-    fetchAgendamentos();
-  }, [medicoLogadoId]);
 
   return (
     <div className={darkMode ? 'dark-mode' : 'light-mode'}>
@@ -197,70 +160,32 @@ export default function HomeMedico() {
           </div>
         )}
 
-        {/* dependente */}
-        {/* {dataDocentes.length > 0 ? (
-          <div className="agendamentos-container">
-            <h2 className='titleHome'>Agendamentos de Dependentes</h2>
-            <div className="navigation-buttons">
-              <button className="nav-btn" onClick={scrollLeft} aria-label="Voltar">&lt;</button>
-              <button className="nav-btn" onClick={scrollRight} aria-label="Avançar">&gt;</button>
-            </div>
-            <div className="carrossel-agendamentos" ref={carrosselRef}>
-              {dataDocentes.map((dependente) => (
-                <div key={dependente.id} className="agendamento-card">
-                  <div className="card-header">
-                    <img
-                      src={dependente.usuario.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
-                      alt="Imagem do Paciente"
-                      className={darkMode ? 'dark-img' : ''}
-                    />
-                    <h3>{dependente.nomeCompleto}</h3>
-                  </div>
-                  <div className="card-body">
-                    <p><FiCalendar /> Data: {new Date(dependente.data).toLocaleDateString('pt-BR')}</p>
-                    <p><FiClock /> Horário: {dependente.hora}</p>
-                    <p><RiFileList2Fill /> Status: {dependente.status}</p>
-                  </div>
-                  <Link to={`/prontuarioDocente/${dependente.id}`} className="botao-prontuario">
-                    Prontuario
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="no-agendamentos">
-            <h2>Nenhum agendamento encontrado</h2>
-          </div>
-        )}
- */}
-
-        {/* dependente */}
+        {/* Dependentes - AGENDAMENTOS DE HOJE */}
         {dataDependentes.length > 0 ? (
           <div className="agendamentos-container">
-            <h2 className='titleHome'>Agendamentos de Dependentes</h2>
+            <h2 className='titleHome'>Agendamentos</h2>
             <div className="navigation-buttons">
               <button className="nav-btn" onClick={scrollLeft} aria-label="Voltar">&lt;</button>
               <button className="nav-btn" onClick={scrollRight} aria-label="Avançar">&gt;</button>
             </div>
             <div className="carrossel-agendamentos" ref={carrosselRef}>
-              {dataDependentes.map((dependente) => (
-                <div key={dependente.id} className="agendamento-card">
+              {dataDependentes.map((agendamento) => (
+                <div key={agendamento.id} className="agendamento-card">
                   <div className="card-header">
                     <img
-                      src={dependente.usuario.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
-                      alt="Imagem do Paciente"
+                      src={agendamento.Dependente?.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
+                      alt="Imagem do Dependente"
                       className={darkMode ? 'dark-img' : ''}
                     />
-                    <h3>{dependente.nomeCompleto}</h3>
+                    <h3>{agendamento.Dependente?.nomeCompleto}</h3>
                   </div>
                   <div className="card-body">
-                    <p><FiCalendar /> Data: {dependente.data.split('-').reverse().join('/')}</p>
-                    <p><FiClock /> Horário: {dependente.hora}</p>
-                    <p><RiFileList2Fill /> Status: {dependente.status}</p>
+                    <p><FiCalendar /> Data: {agendamento.data.split('-').reverse().join('/')}</p>
+                    <p><FiClock /> Horário: {agendamento.hora}</p>
+                    <p><RiFileList2Fill /> Status: {agendamento.status}</p>
                   </div>
-                  <Link to={`/prontuarioDependente/${dependente.id}`} className="botao-prontuario">
-                    Prontuario
+                  <Link to={`/prontuario/${agendamento.Dependente?.id}`} className="botao-prontuario">
+                    Prontuário
                   </Link>
                 </div>
               ))}
@@ -271,6 +196,8 @@ export default function HomeMedico() {
             <h2>Nenhum agendamento encontrado</h2>
           </div>
         )}
+
+
       </main>
       <Footer />
     </div>
