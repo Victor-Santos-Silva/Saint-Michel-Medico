@@ -4,8 +4,9 @@ import Footer from '../../Components/Footer/Footer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
+import { toast } from 'react-toastify';
 
-const Prontuario = () => {
+const ProntuarioDependente = () => {
   const { isDarkMode: darkMode, toggleTheme } = useTheme();
   const { id } = useParams();
   const [dependente, setDependente] = useState(null);
@@ -41,7 +42,7 @@ const Prontuario = () => {
         ...prontuarioData
       });
       alert("Consulta finalizada com sucesso!");
-      window.location.href = "/home";
+      setTimeout(() => navigate('/home'), 2000);
     } catch (error) {
       console.error("Erro ao finalizar consulta:", error);
       alert("Erro ao finalizar consulta.");
@@ -54,8 +55,8 @@ const Prontuario = () => {
         agendamento_id: id
       });
 
-      alert("Paciente não compareceu!");
-      window.location.href = "/home";
+      toast.info("Paciente não compareceu!");
+      setTimeout(() => navigate('/home'), 2000);
     } catch (error) {
       console.error("Erro ao marcar como não comparecido:", error);
       alert("Erro ao processar.");
@@ -154,4 +155,4 @@ const Prontuario = () => {
   );
 };
 
-export default Prontuario;
+export default ProntuarioDependente;

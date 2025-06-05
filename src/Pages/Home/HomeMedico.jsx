@@ -92,7 +92,6 @@ export default function HomeMedico() {
         hoje.setHours(0, 0, 0, 0);
 
         const response = await axios.get(`http://localhost:5000/agendarDependente/agendamentoGeralDependente?medico_id=${medicoLogadoId}`);
-        console.log("Dependente", response.data.agendamentoDependente);
 
         if (Array.isArray(response.data.agendamentoDependente)) {
           const agendamentosFiltrados = response.data.agendamentoDependente.filter(a => {
@@ -169,22 +168,23 @@ export default function HomeMedico() {
               <button className="nav-btn" onClick={scrollRight} aria-label="Avançar">&gt;</button>
             </div>
             <div className="carrossel-agendamentos" ref={carrosselRef}>
-              {dataDependentes.map((agendamento) => (
-                <div key={agendamento.id} className="agendamento-card">
+              {dataDependentes.map((dep) => (
+                <div key={dep.id} className="agendamento-card">
+                  {console.log('dep:', dep)}
                   <div className="card-header">
                     <img
-                      src={agendamento.Dependente?.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
+                      src={dep.Dependente?.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
                       alt="Imagem do Dependente"
                       className={darkMode ? 'dark-img' : ''}
                     />
-                    <h3>{agendamento.Dependente?.nomeCompleto}</h3>
+                    <h3>{dep.Dependente?.nomeCompleto}</h3>
                   </div>
                   <div className="card-body">
-                    <p><FiCalendar /> Data: {agendamento.data.split('-').reverse().join('/')}</p>
-                    <p><FiClock /> Horário: {agendamento.hora}</p>
-                    <p><RiFileList2Fill /> Status: {agendamento.status}</p>
+                    <p><FiCalendar /> Data: {dep.data.split('-').reverse().join('/')}</p>
+                    <p><FiClock /> Horário: {dep.hora}</p>
+                    <p><RiFileList2Fill /> Status: {dep.status}</p>
                   </div>
-                  <Link to={`/prontuario/${agendamento.Dependente?.id}`} className="botao-prontuario">
+                  <Link to={`/prontuarioDependente/${dep?.id}`} className="botao-prontuario">
                     Prontuário
                   </Link>
                 </div>
