@@ -60,11 +60,12 @@ body {
 .login-card {
   width: 100%;
   padding: 2.5rem;
-  background: var(--card-bg);
+  background-color: var(--bg-light);
   border-radius: 16px;
   box-shadow: var(--card-shadow);
   position: relative;
   overflow: hidden;
+
 }
 
 .login-card::before {
