@@ -107,7 +107,7 @@ export default function Historico() {
                       data-aos="fade-up"
                     >
                       <img
-                        src={item.Dependente.imagemGenero}
+                        src={`img/pacienteM.png`}
                         alt={`Foto de ${item.Dependente.nomeCompleto}`}
                         className="imagem-genero"
                       />
