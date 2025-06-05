@@ -34,18 +34,18 @@ const ProntuarioDependente = () => {
 
     try {
       if (!prontuarioData.problemaRelatado || !prontuarioData.recomendacaoMedico) {
-        return alert("Preencha todos os campos do prontuário!");
+        return toast.info("Preencha todos os campos do prontuário!");
       }
 
       await axios.post(`${urlBase}/consultaDependente/concluir`, {
         agendamento_id: id,
         ...prontuarioData
       });
-      alert("Consulta finalizada com sucesso!");
+      toast.success("Consulta finalizada com sucesso!");
       setTimeout(() => navigate('/home'), 2000);
     } catch (error) {
       console.error("Erro ao finalizar consulta:", error);
-      alert("Erro ao finalizar consulta.");
+      toast.error("Erro ao finalizar consulta.");
     }
   };
 
@@ -59,7 +59,7 @@ const ProntuarioDependente = () => {
       setTimeout(() => navigate('/home'), 2000);
     } catch (error) {
       console.error("Erro ao marcar como não comparecido:", error);
-      alert("Erro ao processar.");
+      toast.error("Erro ao processar.");
     }
   };
 

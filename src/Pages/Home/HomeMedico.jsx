@@ -60,14 +60,12 @@ export default function HomeMedico() {
 
         if (Array.isArray(response.data)) {
           const agendamentosFiltrados = response.data.filter(a => {
-            if (!a.data) return false;
-            const dataAgendamento = parseLocalDate(a.data); // << aqui usamos a nova função
             return (
               a.status !== 'finalizado' &&
-              a.status !== 'nao_compareceu' &&
-              isSameLocalDate(dataAgendamento, hoje)
+              a.status !== 'nao_compareceu'
             );
           });
+
 
           setDataUsuarios(agendamentosFiltrados);
         }
@@ -95,15 +93,11 @@ export default function HomeMedico() {
 
         if (Array.isArray(response.data.agendamentoDependente)) {
           const agendamentosFiltrados = response.data.agendamentoDependente.filter(a => {
-            if (!a.data) return false;
-            const dataAgendamento = parseLocalDate(a.data);
             return (
               a.status !== 'finalizado' &&
-              a.status !== 'nao_compareceu' &&
-              isSameLocalDate(dataAgendamento, hoje)
+              a.status !== 'nao_compareceu'
             );
           });
-
           setDataDependentes(agendamentosFiltrados);
         }
       } catch (error) {
@@ -173,7 +167,7 @@ export default function HomeMedico() {
                   {console.log('dep:', dep)}
                   <div className="card-header">
                     <img
-                      src={dep.Dependente?.imagemGenero || (darkMode ? '/img/pacienteM.png' :  '/img/pacienteM.png')}
+                      src={dep.Dependente?.imagemGenero || (darkMode ? '/img/pacienteM.png' : '/img/pacienteM.png')}
                       alt="Imagem do Dependente"
                       className={darkMode ? 'dark-img' : ''}
                     />
