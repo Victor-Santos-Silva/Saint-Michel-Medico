@@ -173,7 +173,7 @@ export default function HomeMedico() {
                   {console.log('dep:', dep)}
                   <div className="card-header">
                     <img
-                      src={dep.Dependente?.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
+                      src={dep.Dependente?.imagemGenero || (darkMode ? '/img/pacienteM.png' :  '/img/pacienteM.png')}
                       alt="Imagem do Dependente"
                       className={darkMode ? 'dark-img' : ''}
                     />

@@ -84,7 +84,7 @@ const ProntuarioDependente = () => {
 
         <div className="prontuario-top">
           <img
-            src={dependente.imagemGenero || (darkMode ? '/imagens/default-dark.png' : '/imagens/default.png')}
+            src={dependente.imagemGenero || (darkMode ? '/img/pacienteM.png' : '/img/pacienteM.png')}
             alt="Imagem do Paciente"
             className={darkMode ? 'dark-img' : ''}
           />
