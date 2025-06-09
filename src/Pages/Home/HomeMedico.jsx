@@ -56,7 +56,7 @@ export default function HomeMedico() {
         const hoje = new Date();
         hoje.setHours(0, 0, 0, 0);
 
-        const response = await axios.get(`http://localhost:5000/agendamento/listar?medico_id=${medicoLogadoId}`);
+        const response = await axios.get(`https://apisaintmichel-a2fjc0c4d3bygmhe.eastus2-01.azurewebsites.net/agendamento/listar?medico_id=${medicoLogadoId}`);
 
         if (Array.isArray(response.data)) {
           const agendamentosFiltrados = response.data.filter(a => {
@@ -89,7 +89,7 @@ export default function HomeMedico() {
         const hoje = new Date();
         hoje.setHours(0, 0, 0, 0);
 
-        const response = await axios.get(`http://localhost:5000/agendarDependente/agendamentoGeralDependente?medico_id=${medicoLogadoId}`);
+        const response = await axios.get(`https://apisaintmichel-a2fjc0c4d3bygmhe.eastus2-01.azurewebsites.net/agendarDependente/agendamentoGeralDependente?medico_id=${medicoLogadoId}`);
 
         if (Array.isArray(response.data.agendamentoDependente)) {
           const agendamentosFiltrados = response.data.agendamentoDependente.filter(a => {

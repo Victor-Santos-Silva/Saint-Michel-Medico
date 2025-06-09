@@ -16,7 +16,7 @@ const ProntuarioDependente = () => {
     recomendacaoMedico: '',
   });
 
-  const urlBase = 'http://localhost:5000';
+  const urlBase = 'https://apisaintmichel-a2fjc0c4d3bygmhe.eastus2-01.azurewebsites.net';
 
   useEffect(() => {
     axios.get(`${urlBase}/agendarDependente/${id}`)

@@ -14,7 +14,7 @@ export default function PerfilMedico() {
     useEffect(() => {
         const fetchMedicoData = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/medico/${id}`, {
+                const response = await axios.get(`https://apisaintmichel-a2fjc0c4d3bygmhe.eastus2-01.azurewebsites.net/medico/${id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 setMedicoData(response.data);

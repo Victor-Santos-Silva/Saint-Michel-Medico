@@ -23,7 +23,7 @@ export default function Historico() {
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/consulta/historico")
+    axios.get("https://apisaintmichel-a2fjc0c4d3bygmhe.eastus2-01.azurewebsites.net/consulta/historico")
       .then(response => {
         setProntuarios(response.data);
       })
@@ -33,7 +33,7 @@ export default function Historico() {
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/consultaDependente/historico")
+    axios.get("https://apisaintmichel-a2fjc0c4d3bygmhe.eastus2-01.azurewebsites.net/consultaDependente/historico")
       .then(response => {
         setprontuarioDependente(response.data);
       })
@@ -41,17 +41,6 @@ export default function Historico() {
         console.error("Erro ao buscar consultas passadas de usuários:", error);
       });
   }, []);
-  /*   useEffect(() => {
-      axios.get("http://localhost:5000/consultaDocente/historico-parente")
-        .then(response => {
-          setProntuarioParente(response.data);
-        })
-        .catch(error => {
-          console.error("Erro ao buscar consultas passadas de usuários:", error);
-        });
-    }, []); */
-
-
 
   return (
     <div className={`page-container ${theme === 'dark' ? 'dark-mode' : ''}`}>

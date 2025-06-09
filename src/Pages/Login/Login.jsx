@@ -65,7 +65,7 @@ export default function Login() {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/medico/login', formData);
+            const response = await axios.post('https://apisaintmichel-a2fjc0c4d3bygmhe.eastus2-01.azurewebsites.net/medico/login', formData);
             login(response.data.medico, response.data.token, response.data.id);
             
             toast.success('Login realizado com sucesso!');
@@ -97,7 +97,7 @@ export default function Login() {
         }
 
         try {
-            await axios.patch('http://localhost:5000/medico/esqueciSenha', {
+            await axios.patch('https://apisaintmichel-a2fjc0c4d3bygmhe.eastus2-01.azurewebsites.net/medico/esqueciSenha', {
                 email_corporativo: forgotPasswordData.email_corporativo,
                 novaSenha: forgotPasswordData.novaSenha
             });
