@@ -58,6 +58,7 @@ export default function HomeMedico() {
 
         const response = await axios.get(`https://apisaintmichel-a2fjc0c4d3bygmhe.eastus2-01.azurewebsites.net/agendamento/listar?medico_id=${medicoLogadoId}`);
 
+        console.log('Response Usuario:', response.data);
         if (Array.isArray(response.data)) {
           const agendamentosFiltrados = response.data.filter(a => {
             return (
@@ -137,7 +138,9 @@ export default function HomeMedico() {
                   </div>
                   <div className="card-body">
                     <p><FiCalendar /> Data: {usuario.data.split('-').reverse().join('/')}</p>
-                    <p><FiClock /> Horário: {usuario.hora}</p>
+                    <p><FiClock /> Horário: {new Date(usuario.hora).toISOString().slice(11, 16)}</p>
+
+
                     <p><RiFileList2Fill /> Status: {usuario.status}</p>
                   </div>
                   <Link to={`/prontuario/${usuario.id}`} className="botao-prontuario">
@@ -164,7 +167,6 @@ export default function HomeMedico() {
             <div className="carrossel-agendamentos" ref={carrosselRef}>
               {dataDependentes.map((dep) => (
                 <div key={dep.id} className="agendamento-card">
-                  {console.log('dep:', dep)}
                   <div className="card-header">
                     <img
                       src={dep.Dependente?.imagemGenero || (darkMode ? '/img/pacienteM.png' : '/img/pacienteM.png')}
@@ -175,7 +177,7 @@ export default function HomeMedico() {
                   </div>
                   <div className="card-body">
                     <p><FiCalendar /> Data: {dep.data.split('-').reverse().join('/')}</p>
-                    <p><FiClock /> Horário: {dep.hora}</p>
+                     <p><FiClock /> Horário: {new Date(dep.hora).toISOString().slice(11, 16)}</p>
                     <p><RiFileList2Fill /> Status: {dep.status}</p>
                   </div>
                   <Link to={`/prontuarioDependente/${dep?.id}`} className="botao-prontuario">
